@@ -1,5 +1,8 @@
 # Бердичевский Максим, гр. 4381
 
+from modules.N.N_NUM import NNum
+
+
 class ZNum:
     """
     Структура хранения параметров для Z-модулей
@@ -8,9 +11,11 @@ class ZNum:
 
     n — номер старшей позиции (кол-во элементов в массиве A).
 
-    A — массив цифр.
+    A — массив цифр (первый разряд на нулевой позиции).
     """
-    def __init__(self, b: int, n: int, a: list[int]):
+    def __init__(self, b: int, natural: NNum):
+        if b not in [1, 0]:
+            raise ValueError
         self.b = b
-        self.n = n
-        self.A = a
+        self.n = natural.n
+        self.A = natural.A

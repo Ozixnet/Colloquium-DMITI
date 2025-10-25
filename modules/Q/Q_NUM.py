@@ -13,5 +13,7 @@ class QNum:
     den_tor — натуральное число, знаменатель.
     """
     def __init__(self, num_tor: ZNum, den_tor: NNum):
+        if den_tor.A[-1] == 0:
+            raise ValueError
         self.num_tor = num_tor
         self.den_tor = den_tor
