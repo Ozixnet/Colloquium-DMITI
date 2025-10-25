@@ -1,7 +1,7 @@
 # Хведынич Варвара Андреевна, гр. 4381
 
 from modules.N.N_NUM import NNum
-from modules.N.COM_NN_D import COM_NN_D_f
+from modules.N.com_nn_d import COM_NN_D_f
 
 
 def SUB_NN_N_f(a: NNum, b: NNum) -> NNum:

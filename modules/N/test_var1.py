@@ -1,6 +1,6 @@
 from modules.N.N_NUM import NNum
 import pytest
-from modules.N.COM_NN_D import COM_NN_D_f
+from modules.N.com_nn_d import COM_NN_D_f
 from NZER_N_B import NZER_N_B_f
 from ADD_NN_N import ADD_NN_N_f
 from SUB_NN_N import SUB_NN_N_f
