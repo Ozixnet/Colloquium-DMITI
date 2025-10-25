@@ -1,6 +1,8 @@
+import pytest
 from modules.Z.Z_NUM import ZNum
 from modules.Z.ABS_Z_N import ABS_Z_N_f
 from modules.N.N_NUM import NNum
+
 
 def test_abs_z_n_normal_cases():
     result = ABS_Z_N_f(ZNum(1, NNum(3, [1, 2, 3])))
@@ -8,6 +10,7 @@ def test_abs_z_n_normal_cases():
 
     result = ABS_Z_N_f(ZNum(1, NNum(3, [4, 5, 6])))
     assert result.A == [4, 5, 6]
+
 
 def test_abs_z_n_large_number():
     big_num = ZNum(1, NNum(1000, [9] * 1000))

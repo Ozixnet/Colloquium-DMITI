@@ -2,11 +2,12 @@
 
 from modules.N.N_NUM import NNum
 
+
 def MUL_ND_N_f(num: NNum, k: int) -> NNum:
     if not isinstance(k, int) or k < 0:
         raise ValueError("k должно быть натуральным числом >= 0")
 
-    a = num.A[:]
+    a = num.A
     result = []
     carry = 0
 

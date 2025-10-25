@@ -2,11 +2,14 @@
 
 from modules.N.N_NUM import NNum
 
+
 def ADD_1N_N_f(num: NNum) -> NNum:
     """
     Функция добавления 1 к натуральному числу
+
     num — экземпляр класса NNum (натуральное число)
-    Возвращает новый экземпляр NNum
+
+    Возврат - NNum
     """
     carry = 1
     a = num.A[:]
