@@ -12,7 +12,5 @@ def MUL_Nk_N_f(num: NNum, k: int) -> NNum:
     if not isinstance(k, int) or k < 0:
         raise ValueError("k должно быть натуральным числом >= 0")
 
-    a = num.A[:]        # копируем цифры
-    a.extend([0] * k)   # добавляем k нулей в конец (младшие разряды)
-
+    a = [0] * k + num.A[:]  # добавляем k нулей в начало (младший разряд первый)
     return NNum(len(a), a)

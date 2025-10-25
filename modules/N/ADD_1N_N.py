@@ -9,6 +9,7 @@ def ADD_1N_N_f(num: NNum) -> NNum:
     Возвращает новый экземпляр NNum
     """
     carry = 1
+    a = num.A[:]
 
     for i in range(len(a)):
         a[i] += carry
@@ -18,7 +19,6 @@ def ADD_1N_N_f(num: NNum) -> NNum:
         a[i] = 0
 
     if carry:
-        a.append(1)
+        a.append(1)  # добавляем старший разряд в конец
 
-    a.reverse()
     return NNum(len(a), a)
