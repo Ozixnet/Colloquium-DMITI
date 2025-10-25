@@ -8,7 +8,6 @@ def ADD_1N_N_f(num: NNum) -> NNum:
     num — экземпляр класса NNum (натуральное число)
     Возвращает новый экземпляр NNum
     """
-    a = num.A[::-1]
     carry = 1
 
     for i in range(len(a)):
