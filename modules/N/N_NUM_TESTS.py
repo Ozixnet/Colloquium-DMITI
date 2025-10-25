@@ -1,8 +1,9 @@
 from modules.N.N_NUM import NNum
-import pytest 
+import pytest
+
 
 def test_for_valid_NNum():
-    # Обычные числа 
+    # Обычные числа
     zero = NNum(1, [0])
     assert zero.n == 1 and zero.A == [0]
 
@@ -29,7 +30,7 @@ def test_for_valid_NNum():
     with pytest.raises(ValueError):
         NNum(2, [1, 2, 3])  
 
-    # Ведущий ноль 
+    # Ведущий ноль
     with pytest.raises(ValueError):
         NNum(3, [1, 2, 0]) 
 
