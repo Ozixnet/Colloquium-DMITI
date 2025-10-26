@@ -1,3 +1,5 @@
+# Хведынич Варвара Андреевна, гр. 4381
+
 from modules.N.N_NUM import NNum
 import pytest
 from modules.N.com_nn_d import COM_NN_D_f
