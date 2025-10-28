@@ -1,3 +1,5 @@
+# Гайнутдинова Зарина, гр. 4381
+
 import pytest
 from modules.Z.Z_NUM import ZNum
 from modules.N.N_NUM import NNum
