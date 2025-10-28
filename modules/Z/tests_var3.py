@@ -7,6 +7,7 @@ from modules.Z.MUL_ZM_Z import MUL_ZM_Z_f
 from modules.Z.TRANS_N_Z import TRANS_N_Z_f
 from modules.Z.TRANS_Z_N import TRANS_Z_N_f
 
+
 # функция для проверки положительности числа
 def test_POZ_Z_D_f():
     num1 = ZNum(1, NNum(4, [1, 2, 3, 4]))
@@ -14,7 +15,7 @@ def test_POZ_Z_D_f():
     num3 = ZNum(0, NNum(4, [1, 2, 3, 4]))
     assert POZ_Z_D_f(num1) == 1     # отрицательное => 1
     assert POZ_Z_D_f(num2) == 0     # 0 => 0
-    assert POZ_Z_D_f(num3) == -1    # положительное => -1
+    assert POZ_Z_D_f(num3) == 2    # положительное => 2
 
 
 # функция для проверки умножения на (-1)
