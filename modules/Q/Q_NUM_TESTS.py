@@ -1,11 +1,9 @@
-# Ишамчурин Данил, гр. 4381
+# Ишамчурин Данил Ильфирович, гр. 4381
 
+import pytest
 from modules.Q.Q_NUM import QNum
 from modules.Z.Z_NUM import ZNum
 from modules.N.N_NUM import NNum
-
-import pytest
-
 
 
 def test_for_QNum():

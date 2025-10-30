@@ -2,17 +2,15 @@
 
 from modules.Q.Q_NUM import QNum
 
+
 def INT_Q_B_f(num: QNum) -> str:
     """
     Проверяет сокращенное дробное на целое
 
-    num - значение типа QNum
+    num - значение типа QNum.
 
-    Возврат - str
+    Возврат - str.
     """
-
-    #Здесь должна быть проверка на то, что дробь сокращенная.
-
     # Если знаменатель 1, значит целое
     if num.den_tor.n == 1 and num.den_tor.A[0] == 1:
         return 'да'
