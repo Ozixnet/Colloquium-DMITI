@@ -4,7 +4,7 @@ from modules.N.N_NUM import NNum
 from modules.N.COM_NN_D import COM_NN_D_f
 from modules.N.NZER_N_B import NZER_N_B_f
 from modules.N.GCF_NN_N import GCF_NN_N_f
-from modules.N.SUB_NDN_N import MUL_NN_N_f
+from modules.N.MUL_NDN_N import MUL_NN_N_f
 from modules.N.DIV_NN_N import DIV_NN_N_f
 
 def LCM_NN_N_f(a : NNum, b : NNum) -> NNum:
