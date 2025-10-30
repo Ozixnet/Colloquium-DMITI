@@ -4,7 +4,7 @@ from modules.Q.Q_NUM import QNum
 from modules.Z.Z_NUM import ZNum
 from modules.N.N_NUM import NNum
 
-def TRANS_Z_Q_f(num: QNum) -> ZNum:
+def TRANS_Q_Z_f(num: QNum) -> ZNum:
     """
     Преобразует дробное число в целое
 
@@ -16,8 +16,3 @@ def TRANS_Z_Q_f(num: QNum) -> ZNum:
         return ZNum(num.num_tor.b, NNum(num.num_tor.n, num.num_tor.A))
     else:
         raise ValueError("Знаменатель не равен 1")
-
-n1 = NNum(1, [1])
-n2 = ZNum(0, NNum(3, [1, 5, 9]))
-n3 = QNum(n2, n1)
-print(TRANS_Z_Q_f(n3).A)
