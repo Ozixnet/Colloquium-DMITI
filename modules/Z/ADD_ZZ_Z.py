@@ -4,16 +4,18 @@ from modules.Z.POZ_Z_D import POZ_Z_D_f
 from modules.Z.ABS_Z_N import ABS_Z_N_f
 from modules.N.ADD_NN_N import ADD_NN_N_f
 from modules.N.SUB_NN_N import SUB_NN_N_f
-from modules.N.COM_NN_D import COM_NN_D_f
-from modules.Z.MUL_ZM_Z import MUL_ZM_Z_f
+from modules.N.com_nn_d import COM_NN_D_f
 
 
 def ADD_ZZ_Z_f(a: ZNum, b: ZNum) -> ZNum:
     """
     Сложение целых чисел
-    a - первое целое число
-    b - второе целое число
-    Возврат - ZNum
+
+    a - первое целое число.
+
+    b - второе целое число.
+
+    Возврат - ZNum.
     """
 
     # Получаем знаки чисел
@@ -63,8 +65,5 @@ def ADD_ZZ_Z_f(a: ZNum, b: ZNum) -> ZNum:
     # Одно из чисел ноль
     elif sign_a == 0:
         return b
-    elif sign_b == 0:
-        return a
-
     else:
-        return ZNum(0, NNum(1, [0]))
+        return a
