@@ -2,8 +2,8 @@
 
 from modules.N.N_NUM import NNum
 from modules.N.DIV_NN_N import DIV_NN_N_f
-from modules.N.SUB_NDN_N import SUB_NDN_N_f
-
+from modules.N.SUB_NN_N import SUB_NN_N_f
+from module.N.NZER_N_B import NZER_N_B_f
 
 def MOD_NN_N_f(a: NNum, b: NNum) -> NNum:
     """
@@ -12,11 +12,6 @@ def MOD_NN_N_f(a: NNum, b: NNum) -> NNum:
     b - второе натуральное число.
     Возврат - NNum.
     """
-
-    # COM_NN_D
-    # Сравнение натуральных чисел: 2 - если первое больше второго; 0, если равно; 1 иначе.
-    if COM_NN_D_f(a, b) not in [0, 2]:
-        a, b = b, a
 
     #NZER_N_B
     #Проверка на ноль: если число не равно нулю, то «да», иначе «нет»
@@ -40,5 +35,6 @@ def MOD_NN_N_f(a: NNum, b: NNum) -> NNum:
     # SUB_NN_N
     # Вычитание из первого большего натурального числа второго меньшего или равного
     remainder = SUB_NN_N_f(a, multi)
+
 
     return NNum(remainder.n, remainder.A)
