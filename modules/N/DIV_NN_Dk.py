@@ -1,3 +1,5 @@
+# Землякова Анастасия, гр. 4381
+
 from modules.N.N_NUM import NNum
 from modules.N.com_nn_d import COM_NN_D_f
 from modules.N.MUL_Nk_N import MUL_Nk_N_f

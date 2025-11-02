@@ -47,7 +47,6 @@ def test_for_SUB_NDN_N():
     
     # Вычитание с нулевым результатом
     result = SUB_NDN_N_f(NNum(2, [0, 1]), NNum(1, [5]), 2)
-
     assert result.n == 1 and result.A == [0]
     
     print("SUB_NDN_N tests passed!")
@@ -110,7 +109,6 @@ def run_all_tests():
     test_for_DIV_NN_N()
     
     print("\nAll tests passed successfully!")
-
 
 # Запуск тестов
 if __name__ == "__main__":
