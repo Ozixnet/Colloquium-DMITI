@@ -1,3 +1,5 @@
+# Вакух Виктор Сергеевич, гр. 4381
+
 from modules.Z.Z_NUM import ZNum
 from modules.N.N_NUM import NNum
 from modules.Z.ADD_ZZ_Z import ADD_ZZ_Z_f

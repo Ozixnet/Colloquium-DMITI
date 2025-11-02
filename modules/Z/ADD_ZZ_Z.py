@@ -1,3 +1,5 @@
+# Вакух Виктор Сергеевич, гр. 4381
+
 from modules.Z.Z_NUM import ZNum
 from modules.N.N_NUM import NNum
 from modules.Z.POZ_Z_D import POZ_Z_D_f
@@ -10,11 +12,8 @@ from modules.N.com_nn_d import COM_NN_D_f
 def ADD_ZZ_Z_f(a: ZNum, b: ZNum) -> ZNum:
     """
     Сложение целых чисел
-
     a - первое целое число.
-
     b - второе целое число.
-
     Возврат - ZNum.
     """
 
