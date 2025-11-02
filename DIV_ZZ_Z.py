@@ -2,7 +2,7 @@ from modules.Z.Z_NUM import ZNum
 from modules.N.N_NUM import Nnum
 from modules.Z.POZ_Z_D import POZ_Z_D
 from modules.N.ABS_Z_N import ABS_Z_N
-from modules.N.DIV_N_N import DIV_N_N
+from modules.N.DIV_NN_N import DIV_NN_N
 from modules.Z.MUL_ZM_Z import MUL_ZM_Z
 
 
@@ -14,8 +14,8 @@ def DIZ_ZZ_Z(arg1: ZNum, arg2:ZNum)-> ZNum:
             arg2 - делитель, целое число, не может быть 0
             Возврат - Znum
             """
-    if arg2 == ZNum(0, Nnum(1, [0])):
-        raise ValueError("ОШИБКА: Делитель должен быть отличен от нуля")
+    if arg2.n == 1 and arg2.A[0] == 0:
+        raise ValueError("Ошибка. Делитель равен нулю")
     # если делимое является 0
     if arg1 == ZNum(0, Nnum(1, [0])):
         return ZNum(0, Nnum(1, [0]))
@@ -24,11 +24,11 @@ def DIZ_ZZ_Z(arg1: ZNum, arg2:ZNum)-> ZNum:
     # получаем абсолютное значение двух чисел
     marg1, marg2 = ABS_Z_N(arg1), ABS_Z_N(arg2)
     # получаем модуль частное от деления
-    res = DIV_N_N(marg1, marg2)
+    res = DIV_NN_N(marg1, marg2)
     # сравниваем флаги
     # если == -> положительный znum
     if flag1 == flag2:
         return ZNum(0, res)
     # если != то -> отрицательное целое
     else:
-        return MUL_ZM_Z(res)
+        return MUL_ZM_Z(ZNum(0, res))
