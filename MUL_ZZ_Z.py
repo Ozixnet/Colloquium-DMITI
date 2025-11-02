@@ -28,4 +28,4 @@ def MUL_ZZ_Z(arg1: ZNum, arg2:ZNum)-> ZNum:
         return ZNum(0, res)
     # знаки не сходятся -> число отрицательное
     else:
-        return MUL_ZM_Z(res)
+        return MUL_ZM_Z(ZNum(0, res))
