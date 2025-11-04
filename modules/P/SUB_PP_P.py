@@ -38,12 +38,8 @@ def SUB_PP_P_f(poly1: PNum, poly2: PNum) -> PNum:
     # ибо по структуре он нулем быть не может. 
     # происходит поиск первой ненулевойЮ начиная с максимальной и лвигаясь вниз 
     actual_degree = max_degree
-    if max_degree >= 0:
-        while actual_degree >= 0:
-            if result_coeffs[actual_degree].num_tor.A == [0]:
-                actual_degree -= 1
-            else:
-                break
+    while actual_degree >= 0 and all(digit == 0 for digit in result_coeffs[actual_degree].num_tor.A):
+        actual_degree -= 1
 
     # если actual_degree стал нулем это значит, что все коэффициенты оказались нулевые. 
     # тогда возвращаем нулевой полином. как я поняла из структуры степнь -1 как раз нулевой полином 
@@ -55,3 +51,4 @@ def SUB_PP_P_f(poly1: PNum, poly2: PNum) -> PNum:
         result_coeffs = result_coeffs[:actual_degree + 1]
     
     return PNum(actual_degree, result_coeffs)
+
