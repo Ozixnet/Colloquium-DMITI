@@ -3,8 +3,8 @@
 from modules.N.N_NUM import NNum
 from modules.N.DIV_NN_N import DIV_NN_N_f
 from modules.N.SUB_NN_N import SUB_NN_N_f
-from module.N.NZER_N_B import NZER_N_B_f
-from module.N.MUL_NN_N import MUL_NN_N_f
+from modules.N.NZER_N_B import NZER_N_B_f
+from modules.N.MUL_NN_N import MUL_NN_N_f
 
 def MOD_NN_N_f(a: NNum, b: NNum) -> NNum:
     """
@@ -36,4 +36,5 @@ def MOD_NN_N_f(a: NNum, b: NNum) -> NNum:
 
 
     return NNum(remainder.n, remainder.A)
+
 
