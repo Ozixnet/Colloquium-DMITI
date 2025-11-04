@@ -19,17 +19,13 @@ def MUL_PQ_P_f(poly: PNum, number: QNum) -> PNum:
     # создание нулеового рац числа 
     zero_rational = QNum(ZNum(0, NNum(1, [0])), NNum(1, [1]))
 
-    # если умножаем на ноль или полином нулевой изначально 
-    # возвращаем нулевой полином 
-    if number.num_tor.A == [0] or poly.m == -1:
+    # Проверка на ноль: если умножаем на ноль или полином нулевой,
+    # возвращаем нулевой полином
+    if all(digit == 0 for digit in number.num_tor.A) or poly.m == -1:
         return PNum(-1, [zero_rational])
-    
-    result_coeffs = []
 
-    # проход оп всем степеням и умножение коэффициентов. 
-    # после возврат результата 
-    for i in range(poly.m + 1):
-        product_coeff = MUL_QQ_Q_f(poly.C[i], number)
-        result_coeffs.append(product_coeff)
+    # Умножение всех коэффициентов на число
+    result_coeffs = [MUL_QQ_Q_f(poly.C[i], number) for i in range(poly.m + 1)] 
+    
     
     return PNum(poly.m, result_coeffs)
