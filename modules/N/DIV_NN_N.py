@@ -56,14 +56,17 @@ def DIV_NN_N_f(a: NNum, b: NNum) -> NNum:
             current_pos += 1
 
         try:
-            # Вычитаем b * digit * 10^power из остатка
-            # Сначала вычитаем b * digit (основная часть)
-            remainder = SUB_NDN_N_f(remainder, b, digit)
+            # Создаем b×10^power через сдвиг разрядов
+            if power > 0:
+                b_shifted_digits = [0] * power + b.A
+                b_shifted = NNum(len(b_shifted_digits), b_shifted_digits)
+            else:
+                b_shifted = b
             
-            # Затем учитываем сдвиг - вычитаем b * digit еще power раз
-            # (это эквивалентно умножению на 10^power)
-            for _ in range(power):
-                remainder = SUB_NDN_N_f(remainder, b, digit)
+            # Вычитаем 1 раз
+            remainder = SUB_NDN_N_f(remainder, b_shifted, digit)
+
+
                 
         except ValueError:
             # Если вычитание привело к отрицательному результату,
