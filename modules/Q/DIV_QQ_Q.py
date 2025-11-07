@@ -26,3 +26,4 @@ def DIV_QQ_Q_f(num1: QNum, num2: QNum) -> QNum:
         MUL1 = MUL_ZM_Z_f(MUL1)
     # Полученная дробь
     DIV_Q = QNum(MUL1, TRANS_Z_N_f(MUL2))
+    return DIV_Q

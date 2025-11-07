@@ -17,3 +17,5 @@ def MUL_QQ_Q_f(num1: QNum, num2: QNum) -> QNum:
     MUL_den_tor = MUL_NN_N_f(num1.den_tor, num2.den_tor)
     # Полученная дробь
     MUL_Q = QNum(MUL_num_tor, MUL_den_tor)
+    return MUL_Q
+

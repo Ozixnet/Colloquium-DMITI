@@ -30,3 +30,4 @@ def SUB_QQ_Q_f(num1: QNum, num2: QNum) -> QNum:
     SUB_Z = SUB_ZZ_Z_f(MUL1, MUL2)
     # Полученная дробь
     SUB_Q = QNum(SUB_Z, LCM)
+    return SUB_Q
