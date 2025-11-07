@@ -32,4 +32,3 @@ def ADD_QQ_Q_f(num1: QNum, num2: QNum) -> QNum:
     ADD_Z = ADD_ZZ_Z_f(MUL1, MUL2)
     # Полученная дробь
     ADD_Q = QNum(ADD_Z, LCM)
-print(ADD_QQ_Q(QNum(ZNum(0, NNum(2, [7, 2])), NNum(2, [3, 5]))))
