@@ -10,7 +10,9 @@ from modules.Z.MUL_ZM_Z import MUL_ZM_Z_f
 def DIV_QQ_Q_f(num1: QNum, num2: QNum) -> QNum:
     """
     Делит дробь на дробь
+
     num1 и num2 - значение типа QNum.
+
     Возврат - QNum.
     """
     # Преобразование знаменателей дробей в целые числа

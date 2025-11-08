@@ -2,13 +2,15 @@
 
 from modules.Q.Q_NUM import QNum
 from modules.Z.MUL_ZZ_Z import MUL_ZZ_Z_f
-from modules.Z.MUL_NN_N import MUL_NN_N_f
+from modules.N.MUL_NN_N import MUL_NN_N_f
 
 
 def MUL_QQ_Q_f(num1: QNum, num2: QNum) -> QNum:
     """
     Умножает дробь на дробь
+
     num1 и num2 - значение типа QNum.
+
     Возврат - QNum.
     """
     # Умножение числителей дробей

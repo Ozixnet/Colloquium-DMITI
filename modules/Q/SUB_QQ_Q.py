@@ -11,7 +11,9 @@ from modules.Z.TRANS_N_Z import TRANS_N_Z_f
 def SUB_QQ_Q_f(num1: QNum, num2: QNum) -> QNum:
     """
     Вычитает из дроби дробь
+
     num1 и num2 - значение типа QNum.
+
     Возврат - QNum.
     """
     # НОК знаменателей дробей
