@@ -1,3 +1,5 @@
+# Двойникова Валерия Алексеевна, гр. 4381
+
 import pytest
 from modules.N.ADD_1N_N import ADD_1N_N_f
 from modules.N.MUL_ND_N import MUL_ND_N_f
