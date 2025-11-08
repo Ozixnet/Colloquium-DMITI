@@ -5,7 +5,6 @@ from modules.Q.Q_NUM import QNum
 from modules.Z.Z_NUM import ZNum
 from modules.N.N_NUM import NNum
 
-from modules.P.MUL_PQ_P import MUL_PQ_P_f
 from modules.P.MUL_Pxk_P import MUL_Pxk_P_f
 from modules.P.ADD_PP_P import ADD_PP_P_f
 from modules.Q.MUL_QQ_Q import MUL_QQ_Q_f
@@ -15,8 +14,9 @@ def MUL_PP_P_f(poly1: PNum, poly2: PNum) -> PNum:
     """
     Умножение многочленов
 
-    poly1, poly2 - многочлены для умножения
-    Возврат - произведение многочленов
+    poly1, poly2 - многочлены для умножения.
+
+    Возврат - произведение многочленов.
     """
     zero_rational = QNum(ZNum(0, NNum(1, [0])), NNum(1, [1]))
 

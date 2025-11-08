@@ -8,6 +8,7 @@ from modules.N.N_NUM import NNum
 from modules.P.FAC_P_Q import FAC_P_Q_f
 from modules.P.MUL_PP_P import MUL_PP_P_f
 
+
 def create_rational(num: int, den: int = 1) -> QNum:
     """
     Создает рациональное число вида num/den
@@ -49,6 +50,7 @@ def test_for_FAC_P_Q():
     result4 = FAC_P_Q_f(zero_poly)
     assert result4.num_tor.A == [1]  # числитель = 1
     assert result4.den_tor.A == [1]  # знаменатель = 1
+
 
 def test_for_MUL_PP_P():
     # (x + 1) * (x + 2) = x^2 + 3x + 2
@@ -94,6 +96,7 @@ def test_for_MUL_PP_P():
     assert result6.m == 1
     assert result6.C[0].num_tor.A == [2]
     assert result6.C[1].num_tor.A == [2]
+
 
 test_for_FAC_P_Q()
 test_for_MUL_PP_P()
