@@ -25,11 +25,10 @@ def GCF_NN_N_f(a: NNum, b: NNum) ->NNum:
 
     # Остаток от деления первого натурального числа на второе натуральное (делитель отличен от нуля).
     while True:
-        remainer = MOD_NN_N_f(a, b)
-        if NZER_N_B_f(remainer) == "нет":
+        remainder = MOD_NN_N_f(a, b)
+        if NZER_N_B_f(remainder) == "нет":
             GCF = b
             break
         a = b
-        b = remainer
-
+        b = remainder
     return NNum(GCF.n, GCF.A)

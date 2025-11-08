@@ -84,10 +84,10 @@ def test_for_MOD_NN_N():
     assert result2.A == [3]
 
     # Деление на ноль должно вызывать ошибку
-    with pytest.raises(ValueError, match="Делитель не должен быть равен нулю"):
+    with pytest.raises(ValueError, match="Деление на ноль"):
         MOD_NN_N_f(NNum(1, [5]), zero)
 
-    with pytest.raises(ValueError, match="Делитель не должен быть равен нулю"):
+    with pytest.raises(ValueError, match="Деление на ноль"):
         MOD_NN_N_f(zero, zero)
 
 
@@ -98,14 +98,14 @@ def test_for_GCF_NN_N():
     result = GCF_NN_N_f(NNum(1, [6]), NNum(1, [8]))  # НОД(6, 8) = 2
     assert result.n == 1 and result.A == [2]
 
-    result = GCF_NN_N_f(NNum(1, [2,1]), NNum(1, [8,1]))  # НОД(12, 18) = 6
+    result = GCF_NN_N_f(NNum(2, [2,1]), NNum(2, [8,1]))  # НОД(12, 18) = 6
     assert result.n == 1 and result.A == [6]
 
-    result = GCF_NN_N_f(NNum(1, [5,1]), NNum(1, [5,2]))  # НОД(15, 25) = 5
+    result = GCF_NN_N_f(NNum(2, [5,1]), NNum(2, [5,2]))  # НОД(15, 25) = 5
     assert result.n == 1 and result.A == [5]
 
     # Взаимно простые числа
-    result = GCF_NN_N_f(NNum(1, [7]), NNum(1, [3,1]))  # НОД(7, 13) = 1
+    result = GCF_NN_N_f(NNum(1, [7]), NNum(2, [3,1]))  # НОД(7, 13) = 1
     assert result.n == 1 and result.A == [1]
 
     result = GCF_NN_N_f(NNum(1, [8]), NNum(1, [9]))  # НОД(8, 9) = 1
@@ -119,7 +119,7 @@ def test_for_GCF_NN_N():
     assert result.n == 2 and result.A == [1, 2]
 
     # Одно число является делителем другого
-    result = GCF_NN_N_f(NNum(1, [3]), NNum(1, [2,1]))  # НОД(3, 12) = 3
+    result = GCF_NN_N_f(NNum(1, [3]), NNum(2, [2,1]))  # НОД(3, 12) = 3
     assert result.n == 1 and result.A == [3]
 
     result = GCF_NN_N_f(NNum(2, [0, 1]), NNum(1, [5]))  # НОД(10, 5) = 5
@@ -140,8 +140,8 @@ def test_for_GCF_NN_N():
     assert result.n == 2 and result.A == [4, 1]  # 14 = [4, 1] так как цифры хранятся в обратном порядке
 
     # Числа в разном порядке (должны давать одинаковый результат)
-    result1 = GCF_NN_N_f(NNum(1, [8]), NNum(1, [2, 1]))  # НОД(8, 12) = 4
-    result2 = GCF_NN_N_f(NNum(1, [2,1]), NNum(1, [8]))  # НОД(12, 8) = 4
+    result1 = GCF_NN_N_f(NNum(1, [8]), NNum(2, [2, 1]))  # НОД(8, 12) = 4
+    result2 = GCF_NN_N_f(NNum(2, [2,1]), NNum(1, [8]))  # НОД(12, 8) = 4
     assert result1.n == 1 and result1.A == [4]
     assert result2.n == 1 and result2.A == [4]
     assert result1.A == result2.A
@@ -156,24 +156,24 @@ def test_for_GCF_NN_N():
     # Случай с нулем в одном из чисел (должна быть ошибка)
     zero = NNum(1, [0])
 
-    with pytest.raises(ValueError, match="a или/и b == нулю"):
+    with pytest.raises(ValueError, match="b равно нулю"):
         GCF_NN_N_f(zero, NNum(1, [5]))
 
-    with pytest.raises(ValueError, match="a или/и b == нулю"):
+    with pytest.raises(ValueError, match="b равно нулю"):
         GCF_NN_N_f(NNum(1, [5]), zero)
 
-    with pytest.raises(ValueError, match="a или/и b == нулю"):
+    with pytest.raises(ValueError, match="b равно нулю"):
         GCF_NN_N_f(zero, zero)
 
     # Алгоритм Евклида - последовательные шаги
-    result = GCF_NN_N_f(NNum(1, [8,4]), NNum(1, [8,1]))  # НОД(48, 18) = 6
+    result = GCF_NN_N_f(NNum(2, [8,4]), NNum(2, [8,1]))  # НОД(48, 18) = 6
     assert result.n == 1 and result.A == [6]
 
-    result = GCF_NN_N_f(NNum(1, [6,5]), NNum(1, [2,4]))  # НОД(56, 42) = 14
+    result = GCF_NN_N_f(NNum(2, [6,5]), NNum(2, [2,4]))  # НОД(56, 42) = 14
     assert result.n == 2 and result.A == [4, 1]  # 14 = [4, 1]
 
     # Большие взаимно простые числа
-    result = GCF_NN_N_f(NNum(1, [7, 1]), NNum(1, [9,1]))  # НОД(17, 19) = 1
+    result = GCF_NN_N_f(NNum(2, [7, 1]), NNum(2, [9,1]))  # НОД(17, 19) = 1
     assert result.n == 1 and result.A == [1]
 
     # Дополнительные тесты с корректной записью чисел
@@ -252,13 +252,13 @@ def test_for_LCM_NN_N():
     # Случай с нулем в одном из чисел (должна быть ошибка)
     zero = NNum(1, [0])
 
-    with pytest.raises(ValueError, match="a или/и b == нулю"):
+    with pytest.raises(ValueError, match="b равно нулю"):
         LCM_NN_N_f(zero, NNum(1, [5]))
 
-    with pytest.raises(ValueError, match="a или/и b == нулю"):
+    with pytest.raises(ValueError, match="b равно нулю"):
         LCM_NN_N_f(NNum(1, [5]), zero)
 
-    with pytest.raises(ValueError, match="a или/и b == нулю"):
+    with pytest.raises(ValueError, match="b равно нулю"):
         LCM_NN_N_f(zero, zero)
 
     # Алгоритм проверки: НОК(a, b) × НОД(a, b) = a × b
