@@ -12,5 +12,4 @@ def LED_P_Q_f(p : PNum)->QNum:
     Возврат — QNum.
     """
 
-    led_coef = p.C[-1]
-    return led_coef
+    return p.C[-1]

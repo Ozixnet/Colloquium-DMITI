@@ -11,6 +11,8 @@ def DEG_P_N_f(p : PNum)->int:
 
     Возврат - int.
     """
+    if p.m in [-1,0] and p.C[0].num_tor.A[-1] >= 0:
+        return 0
 
-    deg_of_poly = p.m
-    return deg_of_poly
+    else:
+        return p.m

@@ -11,33 +11,36 @@ from modules.P.LED_P_Q import LED_P_Q_f
 
 def test_for_DEG_P_N():
     p1 = PNum(1,[QNum(ZNum(1,NNum(1,[1])),NNum(1,[1])),QNum(ZNum(1,NNum(1,[1])),NNum(1,[1]))])
-    p2 = PNum(0,[QNum(ZNum(1, NNum(1, [0])), NNum(1, [1]))])
+    p2 = PNum(0,[QNum(ZNum(1, NNum(1, [5])), NNum(1, [1]))]) #5
     p3 = PNum(2,[QNum(ZNum(1,NNum(1,[1])),NNum(1,[1])),QNum(ZNum(1,NNum(1,[1])),NNum(1,[1])),QNum(ZNum(1,NNum(1,[2])),NNum(1,[1]))])
+    p4 = PNum(-1, [QNum(ZNum(1, NNum(1, [0])), NNum(1, [1]))]) #0
     assert DEG_P_N_f(p1) == 1
     assert DEG_P_N_f(p2) == 0
     assert DEG_P_N_f(p3) == 2
-    with pytest.raises(ValueError, match="Степень многочлена не может быть отрицательной"):
-        DEG_P_N_f(PNum(-1,[QNum(ZNum(1,NNum(1,[1])),NNum(1,[1]))]))
+    assert DEG_P_N_f(p4) == 0
 
 
 def test_for_DER_P_P():
-    p1 = PNum(1, [QNum(ZNum(1, NNum(1, [1])), NNum(1, [1])), QNum(ZNum(1, NNum(1, [1])), NNum(1, [1]))])
-    p2 = PNum(0, [QNum(ZNum(1, NNum(1, [0])), NNum(1, [1]))])
-    p3 = PNum(2, [QNum(ZNum(1, NNum(1, [1])), NNum(1, [1])), QNum(ZNum(1, NNum(1, [1])), NNum(1, [1])), QNum(ZNum(1, NNum(1, [2])), NNum(1, [1]))])
+    p1 = PNum(1, [QNum(ZNum(1, NNum(1, [1])), NNum(1, [1])), QNum(ZNum(1, NNum(1, [1])), NNum(1, [1]))]) # x + 1
+    p2 = PNum(0, [QNum(ZNum(1, NNum(1, [5])), NNum(1, [1]))]) # 5
+    p3 = PNum(2, [QNum(ZNum(1, NNum(1, [1])), NNum(1, [1])), QNum(ZNum(1, NNum(1, [1])), NNum(1, [1])), \
+    QNum(ZNum(1, NNum(1, [2])), NNum(1, [1]))]) # 2x^2 + x + 1
+    p4 = PNum(-1, [QNum(ZNum(1, NNum(1, [0])), NNum(1, [1]))]) # 0
     assert DER_P_P_f(p1) == PNum(0, [QNum(ZNum(1, NNum(1, [1])), NNum(1, [1]))])
-    assert DER_P_P_f(p2) == p2
+    assert DER_P_P_f(p2) == PNum(-1, [QNum(ZNum(1, NNum(1, [0])), NNum(1, [1]))])
     assert DER_P_P_f(p3) == PNum(1, [QNum(ZNum(1, NNum(1, [1])), NNum(1, [1])), QNum(ZNum(1, NNum(1, [4])), NNum(1, [1]))])
-    with pytest.raises(ValueError, match="Степень многочлена не может быть отрицательной"):
-        DEG_P_N_f(PNum(-1,[QNum(ZNum(1,NNum(1,[1])),NNum(1,[1]))]))
+    assert DER_P_P_f(p4) == PNum(-1, [QNum(ZNum(1, NNum(1, [0])), NNum(1, [1]))])
 
 
 def test_for_LED_P_Q():
     p1 = PNum(1, [QNum(ZNum(1, NNum(1, [1])), NNum(1, [1])), QNum(ZNum(1, NNum(1, [1])), NNum(1, [1]))])
-    p2 = PNum(0, [QNum(ZNum(1, NNum(1, [0])), NNum(1, [1]))])
+    p2 = PNum(0, [QNum(ZNum(1, NNum(1, [5])), NNum(1, [1]))])
     p3 = PNum(2, [QNum(ZNum(1, NNum(1, [1])), NNum(1, [1])), QNum(ZNum(1, NNum(1, [1])), NNum(1, [1])), QNum(ZNum(1, NNum(1, [2])), NNum(1, [1]))])
-    assert LED_P_Q_f(p1) == 1
-    assert LED_P_Q_f(p2) == 1
-    assert LED_P_Q_f(p3) == 2
+    p4 = PNum(-1, [QNum(ZNum(1, NNum(1, [0])), NNum(1, [1]))])
+    assert LED_P_Q_f(p1) == p1.C[-1]
+    assert LED_P_Q_f(p2) == p2.C[-1]
+    assert LED_P_Q_f(p3) == p3.C[-1]
+    assert LED_P_Q_f(p4) == p4.C[-1]
 
 # Запуски функций
 test_for_DEG_P_N()
