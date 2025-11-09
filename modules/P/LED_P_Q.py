@@ -11,5 +11,11 @@ def LED_P_Q_f(p : PNum)->QNum:
 
     Возврат — QNum.
     """
+    if p is None or not isinstance(p, PNum):
+        raise TypeError("Аргумент должен быть типа PNum")
+    
+    if not p.C:
+        raise ValueError("Невозможно получить старший коэффициент пустого многочлена")
+    
 
     return p.C[-1]
