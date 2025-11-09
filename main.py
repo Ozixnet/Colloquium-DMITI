@@ -38,7 +38,7 @@ class App:
         header_frame.pack(pady=(30, 20), fill=tk.X)
         
         # Главный заголовок
-        title_font = font.Font(family="Segoe UI", size=28, weight="bold")
+        title_font = font.Font(family="Segoe GUI", size=28, weight="bold")
         self.title_label = tk.Label(header_frame, text="Калькулятор модулей", 
                                      bg=self.current_theme["bg"],
                                      fg=self.current_theme["title"], 
@@ -46,7 +46,7 @@ class App:
         self.title_label.pack()
         
         # Подзаголовок
-        subtitle_font = font.Font(family="Segoe UI", size=11)
+        subtitle_font = font.Font(family="Segoe GUI", size=11)
         subtitle_label = tk.Label(header_frame, text="Выберите модуль для работы", 
                                   bg=self.current_theme["bg"],
                                   fg=self.current_theme["subtitle"], 
@@ -62,7 +62,7 @@ class App:
         buttons_frame.pack(expand=True)
 
         
-        button_font = font.Font(family="Segoe UI", size=13, weight="normal")
+        button_font = font.Font(family="Segoe GUI", size=13, weight="normal")
         
         
         btn_natural = self.create_button(buttons_frame, "🔢 Натуральные числа", self.run_file1, button_font)
@@ -74,7 +74,7 @@ class App:
         footer_frame = tk.Frame(root, bg=self.current_theme["bg"])
         footer_frame.pack(side=tk.BOTTOM, pady=10)
         
-        hint_font = font.Font(family="Segoe UI", size=9)
+        hint_font = font.Font(family="Segoe GUI", size=9)
         hint_label = tk.Label(footer_frame, text="Доступно 4 раздела",
                              bg=self.current_theme["bg"],
                              fg=self.current_theme["subtitle"],

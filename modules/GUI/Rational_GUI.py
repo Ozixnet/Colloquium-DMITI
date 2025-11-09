@@ -36,7 +36,7 @@ class RationalApp:
         self.method_var = tk.StringVar(value="Сложение дробей")
 
         # Заголовок
-        title_font = font.Font(family="Segoe UI", size=20, weight="bold")
+        title_font = font.Font(family="Segoe GUI", size=20, weight="bold")
         title_label = tk.Label(root, text="Операции с рациональными", 
                               bg=self.bg_color, fg=self.backlight, font=title_font)
         title_label.pack(pady=(20, 15))
@@ -57,7 +57,7 @@ class RationalApp:
         method_frame = tk.Frame(root, bg=self.bg_color)
         method_frame.pack(pady=15, padx=20, fill=tk.X)
 
-        label_font = font.Font(family="Segoe UI", size=11)
+        label_font = font.Font(family="Segoe GUI", size=11)
         tk.Label(method_frame, text="Операция: ", bg=self.bg_color, fg=self.label_color, font=label_font).pack(side=tk.LEFT, padx=(0, 10))
 
         self.method_menu = tk.OptionMenu(method_frame, self.method_var, *methods, command=self.on_option_change)
@@ -75,13 +75,13 @@ class RationalApp:
         input_frame.pack(pady=15, padx=20, fill=tk.BOTH, expand=True)
 
         # Ввод первого числа
-        input_font = font.Font(family="Segoe UI", size=10)
+        input_font = font.Font(family="Segoe GUI", size=10)
         self.first_number_label = tk.Label(input_frame, text="Первая дробь:", 
                                            bg=self.bg_color, fg=self.label_color, font=input_font)
         self.first_number_label.pack(anchor=tk.W, pady=(0, 5))
         self.first_number_entry = tk.Entry(input_frame, bg=self.entry_bg, fg=self.entry_fg, 
                                            insertbackground='white', 
-                                           font=font.Font(family="Segoe UI", size=12),
+                                           font=font.Font(family="Segoe GUI", size=12),
                                            relief=tk.FLAT, bd=2, highlightthickness=1,
                                            highlightbackground=self.entry_border,
                                            highlightcolor=self.backlight)
@@ -93,21 +93,21 @@ class RationalApp:
         self.second_number_label.pack(anchor=tk.W, pady=(0, 5))
         self.second_number_entry = tk.Entry(input_frame, bg=self.entry_bg, fg=self.entry_fg, 
                                             insertbackground='white', 
-                                            font=font.Font(family="Segoe UI", size=12),
+                                            font=font.Font(family="Segoe GUI", size=12),
                                             relief=tk.FLAT, bd=2, highlightthickness=1,
                                             highlightbackground=self.entry_border,
                                             highlightcolor=self.backlight)
         self.second_number_entry.pack(fill=tk.X, pady=(0, 15), ipady=8)
 
         # Метка для результата
-        result_font = font.Font(family="Segoe UI", size=13, weight="bold")
+        result_font = font.Font(family="Segoe GUI", size=13, weight="bold")
         self.result_label = tk.Label(input_frame, text="", bg=self.bg_color, 
                                      fg=self.backlight, font=result_font,
                                      wraplength=400, justify=tk.LEFT)
         self.result_label.pack(pady=10, fill=tk.X)
 
         # Кнопка для выполнения операции
-        button_font = font.Font(family="Segoe UI", size=13, weight="bold")
+        button_font = font.Font(family="Segoe GUI", size=13, weight="bold")
         self.calculate_button = tk.Button(root, text="Выполнить", command=self.calculate, 
                                          bg=self.button_color, fg="white", 
                                          font=button_font, relief=tk.FLAT, bd=0,
