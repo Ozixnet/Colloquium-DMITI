@@ -15,22 +15,20 @@ def DER_P_P_f(p : PNum)->PNum:
     Возврат - PNum.
     """
     M = p.m
-    if M in [-1,0]:
-        return PNum(0,[QNum( ZNum(1, NNum(1, [0])), NNum(1, [1]))])
+    if M in [-1, 0]:
+    return PNum(-1, [QNum(ZNum(0, NNum(1, [0])), NNum(1, [1]))])
+    # Новый список коэффициентов, чтобы не было мутаций
+    new_coefficients = []
+    for i in range(1, p.m + 1):
+        # Преобразуем степень i в QNum
+        digits = [int(d) for d in str(i)][::-1]
+        degree_qnum = QNum(TRANS_N_Z_f(NNum(len(digits), digits)), NNum(1, [1]))
+        
+        # Умножаем коэффициент на степень и СОХРАНЯЕМ результат
+        new_coeff = MUL_QQ_Q_f(p.C[i], degree_qnum)
+        new_coefficients.append(new_coeff)
+    
+    return PNum(len(new_coefficients) - 1, new_coefficients)
 
-    #удаляем свободный член ввиду взятия производной
-    p.C.pop(0)
-    M -= 1
-    for i in range(M):
-        q = p.C[i]
-        num = list(map(int,str(i+1)))[::-1]
-        deg_of_preDer = QNum(ZNum(1,NNum(len(num),num)),NNum(1,[1])) #N->Q
-
-        #MUL_QQ_Q
-        #Умножение дробей
-        q = MUL_QQ_Q_f(q,deg_of_preDer)
-
-    p.m = M
-    return p
 
 
