@@ -4,16 +4,22 @@ from modules.P.P_NUM import PNum
 from modules.N.N_NUM import NNum
 
 
-def DEG_P_N_f(p : PNum)->NNum:
-    """
-    Возвращает степень многочлена
+def DEG_P_N_f(p: PNum) -> NNum:
 
-    p - многочлен (типа PNum)
+    # Валидация входных данных
+    if p is None or not isinstance(p, PNum):
+        raise TypeError("Аргумент должен быть типа PNum")
 
-    Возврат - NNum.
-    """
-    if p.m in [-1,0] and p.C[0].num_tor.A[-1] >= 0:
-        return NNum(1,[0])
+    if not p.C:
+        raise ValueError("Многочлен не может иметь пустой список коэффициентов")
 
-    N = list(map(int,str(p.m)))[::-1]
-    return NNum(len(N), N)
+    if p.m == -1:
+        return NNum(1, [0])
+
+    # Константа (степень 0)
+    if p.m == 0:
+        return NNum(1, [0])
+
+    # Преобразовать степень многочлена в NNum
+    digits = [int(d) for d in str(p.m)][::-1]
+    return NNum(len(digits), digits)
