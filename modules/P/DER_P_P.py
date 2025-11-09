@@ -28,7 +28,7 @@ def DER_P_P_f(p : PNum)->PNum:
 
         #MUL_QQ_Q
         #Умножение дробей
-        p = MUL_QQ_Q_f(p,deg_of_preDer)
+        q = MUL_QQ_Q_f(q,deg_of_preDer)
 
     p.m = M
     return p
