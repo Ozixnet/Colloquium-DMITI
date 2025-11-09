@@ -4,20 +4,19 @@ from modules.P.P_NUM import PNum
 from modules.Q.Q_NUM import QNum
 from modules.Z.Z_NUM import ZNum
 from modules.N.N_NUM import NNum
-
 from modules.Q.ADD_QQ_Q import ADD_QQ_Q_f
+
 
 def ADD_PP_P_f(poly1: PNum, poly2: PNum) -> PNum:
     """
-    Функция сложения двух многочленов с рациональными коэффициентами.
+    Функция сложения двух многочленов с рациональными коэффициентами
     
-    poly1 - первый многочлен
-    poly2 - второй многочлен
-    
-    Возвращает - PNum: сумма 
-    
-    """
+    poly1 - первый многочлен.
 
+    poly2 - второй многочлен.
+    
+    Возвращает - PNum: сумма.
+    """
     # здесь просто создание рационального нулевого числа в виде дроби 0/1
     zero_rational = QNum(ZNum(0, NNum(1, [0])), NNum(1, [1]))
     

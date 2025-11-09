@@ -9,6 +9,7 @@ from modules.P.ADD_PP_P import ADD_PP_P_f
 from modules.P.SUB_PP_P import SUB_PP_P_f
 from modules.P.MUL_PQ_P import MUL_PQ_P_f
 
+
 # вспомогательная функция 
 def create_rational(num: int) -> QNum:
     #Создает рациональное число вида num/1
@@ -29,8 +30,8 @@ def test_for_ADD_PP_P():
     assert result.C[1].num_tor.A == [3] 
 
     # (2x**2 + 3x + 1) + (x + 2) = 2x**2 + 4x + 3
-    poly3 = PNum(2, [create_rational(1), create_rational(3), create_rational(2)]) 
-    poly4 = PNum(1, [create_rational(2), create_rational(1)]) 
+    poly3 = PNum(2, [create_rational(1), create_rational(3), create_rational(2)])
+    poly4 = PNum(1, [create_rational(2), create_rational(1)])
     result2 = ADD_PP_P_f(poly3, poly4)
     assert result2.m == 2  
     # проверка коэффициентов 0 -- свободный, 2 -- при большей степени 
@@ -100,6 +101,7 @@ def test_for_MUL_PQ_P():
     zero_poly = PNum(-1, [create_rational(0)])
     result4 = MUL_PQ_P_f(zero_poly, number)
     assert result4.m == -1  # нулевой полином
+
 
 test_for_ADD_PP_P()
 test_for_SUB_PP_P()

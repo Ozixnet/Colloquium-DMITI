@@ -7,14 +7,16 @@ from modules.N.N_NUM import NNum
 
 from modules.Q.MUL_QQ_Q import MUL_QQ_Q_f
 
+
 def MUL_PQ_P_f(poly: PNum, number: QNum) -> PNum:
     """
     Умножение многочлена на рациональное число.
     
-    poly - многочлен
-    number - рациональное число
+    poly - многочлен.
+
+    number - рациональное число.
     
-    Возвращает - PNum: многочлен, умноженный на число
+    Возвращает - PNum: многочлен, умноженный на число.
     """
     # создание нулеового рац числа 
     zero_rational = QNum(ZNum(0, NNum(1, [0])), NNum(1, [1]))
