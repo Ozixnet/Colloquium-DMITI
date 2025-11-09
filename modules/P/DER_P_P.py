@@ -23,8 +23,8 @@ def DER_P_P_f(p : PNum)->PNum:
     M -= 1
     for i in range(M):
         q = p.C[i]
-        num = list(map(int,str(i+1).split()))[::-1]
-        deg_of_preDer = QNum(ZNum(1,NNum(len(num),int(num))),NNum(1,[1])) #N->Q
+        num = list(map(int,str(i+1)))[::-1]
+        deg_of_preDer = QNum(ZNum(1,NNum(len(num),num)),NNum(1,[1])) #N->Q
 
         #MUL_QQ_Q
         #Умножение дробей
