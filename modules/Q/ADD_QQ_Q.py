@@ -8,7 +8,6 @@ from modules.N.DIV_NN_N import DIV_NN_N_f
 from modules.Z.MUL_ZZ_Z import MUL_ZZ_Z_f
 from modules.Z.ADD_ZZ_Z import ADD_ZZ_Z_f
 from modules.Z.TRANS_N_Z import TRANS_N_Z_f
-from modules.Q.RED_Q_Q import RED_Q_Q_f
 
 
 def ADD_QQ_Q_f(num1: QNum, num2: QNum) -> QNum:
@@ -35,6 +34,4 @@ def ADD_QQ_Q_f(num1: QNum, num2: QNum) -> QNum:
     ADD_Z = ADD_ZZ_Z_f(MUL1, MUL2)
     # Полученная дробь
     ADD_Q = QNum(ADD_Z, LCM)
-    # Сокращаем дробь для нормализации
-    ADD_Q = RED_Q_Q_f(ADD_Q)
     return ADD_Q
