@@ -1,3 +1,5 @@
+# Тарасов Юрий Романович, гр. 4381
+
 from modules.P.P_NUM import PNum
 from modules.Q.Q_NUM import QNum
 from modules.Z.Z_NUM import ZNum
@@ -6,7 +8,6 @@ from modules.Q.DIV_QQ_Q import DIV_QQ_Q_f
 from modules.P.DEG_P_N import DEG_P_N_f
 from modules.P.MUL_Pxk_P import MUL_Pxk_P_f
 from modules.P.SUB_PP_P import SUB_PP_P_f
-from modules.P.ADD_PP_P import ADD_PP_P_f
 
 
 def DIV_PP_P_f(arg1: PNum, arg2: PNum) -> PNum:

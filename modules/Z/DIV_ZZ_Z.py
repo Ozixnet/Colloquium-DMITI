@@ -1,3 +1,5 @@
+# Тарасов Юрий Романович, гр. 4381
+
 from modules.Z.Z_NUM import ZNum
 from modules.N.N_NUM import NNum
 from modules.Z.POZ_Z_D import POZ_Z_D_f
@@ -6,14 +8,16 @@ from modules.N.DIV_NN_N import DIV_NN_N_f
 from modules.Z.MUL_ZM_Z import MUL_ZM_Z_f
 
 
-# Тарасов Юрий Романович, гр. 4381
 def DIV_ZZ_Z_f(arg1: ZNum, arg2: ZNum)-> ZNum:
     """
-            Частное от деления целого на целое(делитель отличен от нуля)
-            arg1 - первое целое число
-            arg2 - делитель, целое число, не может быть 0
-            Возврат - Znum
-            """
+    Частное от деления целого на целое(делитель отличен от нуля)
+
+    arg1 - первое целое число
+
+    arg2 - делитель, целое число, не может быть 0
+
+    Возврат - Znum
+    """
     if arg2.n == 1 and arg2.A[0] == 0:
         raise ValueError("Ошибка. Делитель равен нулю")
     # если делимое является 0
