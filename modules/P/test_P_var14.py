@@ -6,6 +6,7 @@ from modules.Q.Q_NUM import QNum
 from modules.Z.Z_NUM import ZNum
 from modules.N.N_NUM import NNum
 
+
 # функция проверки нахождения нода
 def test_GCF_PP_P():
     zero_poly = PNum(-1, [QNum(ZNum(0, NNum(1, [0])), NNum(1, [1]))])
