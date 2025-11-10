@@ -35,8 +35,8 @@ def GCF_PP_P_f(poly1: PNum, poly2: PNum) -> PNum:
     # выбираем делитель - многочлен меньшей степени
     divider = poly1 if poly1.m < poly2.m else poly2
 
-    # пока не получили нулевой делитель
-    while divider.m != -1:
+    # пока не получили делитель-константу, так как следующим будет нулевой полином
+    while divider.m > 0:
 
         # находим остаток от деления
         carry = MOD_PP_P_f(divisible, divider)

@@ -36,22 +36,26 @@ def test_GCF_PP_P():
     k2 = QNum(ZNum(0, NNum(1, [1])), NNum(1, [1]))
     poly2 = PNum(2, [k0, k1, k2])
 
+    # x - 2 (поскольку полином не нормируется внутри функции, результат - 4x - 8, что то же самое)
     gcf4 = GCF_PP_P_f(poly1, poly2)
     assert gcf4.m == 1
-    assert gcf4.C[0].num_tor.A == [2] and gcf4.C[0].num_tor.b == 1
-    assert gcf4.C[0].den_tor.A == [1] and gcf4.C[1].num_tor.A == [1] and gcf4.C[1].den_tor.A == [1] and gcf4.m == 1
+    assert gcf4.C[0].num_tor.A == [8] and gcf4.C[1].num_tor.A == [4] and gcf4.C[0].num_tor.b == 1 and gcf4.C[0].num_tor.b == 1
+    assert gcf4.C[0].den_tor.A == [1] and gcf4.C[1].den_tor.A == [1]
 
 
 def test_NMR_P_P():
-    # x^3 - 3x^2 + 4
-    k0 = QNum(ZNum(0, NNum(0, [4])), NNum(1, [1]))
-    k1 = QNum(ZNum(0, NNum(0, [0])), NNum(1, [1]))
-    k2 = QNum(ZNum(1, NNum(1, [3])), NNum(1, [1]))
-    k3 = QNum(ZNum(1, NNum(1, [1])), NNum(1, [1]))
+    # Коэффициенты от младшей степени к старшей:
+    # -8, 12, -6, 1
+
+    k0 = QNum(ZNum(1, NNum(1, [8])), NNum(1, [1]))  # -8/1 = -8
+    k1 = QNum(ZNum(0, NNum(2, [2, 1])), NNum(1, [1]))  # 12/1 = 12
+    k2 = QNum(ZNum(1, NNum(1, [6])), NNum(1, [1]))  # -6/1 = -6
+    k3 = QNum(ZNum(0, NNum(1, [1])), NNum(1, [1]))  # 1/1 = 1
+
     poly = PNum(3, [k0, k1, k2, k3])
 
-    # x^2 - x - 2
+    # x - 2 (поскольку полиномы не нормируются внутри функции, результат - (1/3x - 6/9) = (1/3x - 2/3) = x -2)
     res = NMR_P_P_f(poly)
-    assert res.m == 2 and res.C[0].num_tor.A == [2] and res.C[0].num_tor.b == 1 and res.C[0].den_tor.A == [1]
-    assert res.C[1].num_tor.A == [1] and res.C[1].den_tor.A == [1] and res.C[1].num_tor.b == 1
-    assert res.C[2].num_tor.A == [1] and res.C[1].den_tor.A == [1] and res.C[1].num_tor.b == 0
+    assert res.C[0].num_tor.A == [6] and res.C[0].num_tor.b == 1 and res.C[0].den_tor.A == [9]
+    assert res.C[1].num_tor.A == [1] and res.C[1].num_tor.b == 0 and res.C[1].den_tor.A == [3]
+    assert res.m == 1
