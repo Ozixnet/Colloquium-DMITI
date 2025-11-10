@@ -15,28 +15,29 @@ def test_ADD_QQ_Q_f():
     num1 = QNum(ZNum(0, NNum(1, [7])), NNum(1, [2]))
     num2 = QNum(ZNum(1, NNum(1, [3])), NNum(1, [5]))
     func1 = ADD_QQ_Q_f(num1, num2)
-    assert func1.num_tor.A == [21] and func1.den_tor.A == [10] and func1.num_tor.b == 1
+    assert func1.num_tor.A == [9, 2] and func1.den_tor.A == [0, 1] and func1.num_tor.b == 0
 
 # Функция проверки вычитания дроби из дроби
 def test_SUB_QQ_Q_f():
     num1 = QNum(ZNum(1, NNum(1, [7])), NNum(1, [2]))
     num2 = QNum(ZNum(1, NNum(1, [3])), NNum(1, [5]))
     func1 = SUB_QQ_Q_f(num1, num2)
-    assert func1.num_tor.A == [29] and func1.den_tor.A == [10] and func1.num_tor.b == 1
+    assert func1.num_tor.A == [9, 2] and func1.den_tor.A == [0, 1] and func1.num_tor.b == 1
 
 # Функция проверки деления дробей
 def test_DIV_QQ_Q_f():
     num1 = QNum(ZNum(0, NNum(1, [7])), NNum(1, [2]))
     num2 = QNum(ZNum(1, NNum(1, [3])), NNum(1, [5]))
     func1 = DIV_QQ_Q_f(num1, num2)
-    assert func1.num_tor.A == [35] and func1.den_tor.A == [6] and func1.num_tor.b == 1
+    assert func1.num_tor.A == [5, 3] and func1.den_tor.A == [6] and func1.num_tor.b == 1
+
 
 # Функция проверки умножения дробей
 def test_MUL_QQ_Q_f():
     num1 = QNum(ZNum(0, NNum(1, [6])), NNum(1, [5]))
     num2 = QNum(ZNum(0, NNum(1, [4])), NNum(1, [5]))
     func1 = MUL_QQ_Q_f(num1, num2)
-    assert func1.num_tor.A == [24] and func1.den_tor.A == [25] and func1.num_tor.b == 0
+    assert func1.num_tor.A == [4, 2] and func1.den_tor.A == [5, 2] and func1.num_tor.b == 0
 
 
 
