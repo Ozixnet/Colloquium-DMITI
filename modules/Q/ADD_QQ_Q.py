@@ -1,7 +1,5 @@
 # Ишамчурин Данил Ильфирович, гр. 4381
 
-from modules.Z.Z_NUM import ZNum
-from modules.N.N_NUM import NNum
 from modules.Q.Q_NUM import QNum
 from modules.N.LCM_NN_N import LCM_NN_N_f
 from modules.N.DIV_NN_N import DIV_NN_N_f

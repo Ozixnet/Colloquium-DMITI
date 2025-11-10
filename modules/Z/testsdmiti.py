@@ -1,3 +1,5 @@
+# Тарасов Юрий Романович, гр. 4381
+
 import pytest
 from modules.Z.Z_NUM import ZNum
 from modules.N.N_NUM import NNum
@@ -7,7 +9,6 @@ from modules.Z.MOD_ZZ_Z import MOD_ZZ_Z_f
 from modules.Z.ADD_ZZ_Z import ADD_ZZ_Z_f
 
 
-# Тарасов Юрий Романович, гр. 4381
 class TestMUL_ZZ_Z:
     """Тесты для функции умножения целых чисел MUL_ZZ_Z"""
 
