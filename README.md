@@ -11,7 +11,8 @@
 
 
 Запустите main.py, чтобы воспользоваться интерфейсом
-<img width="1132" height="1132" alt="image" src="https://github.com/user-attachments/assets/89da7d41-5799-44aa-ac26-ec5066e163dc" />
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/bf385169-2467-47e8-bf1e-e79994e33e96" />
+
 
 Введите tests.py - чтобы увидеть прохождение тестов
 
@@ -52,4 +53,5 @@
 9. Хведынич Варвара 
 
 10. Хохряков Пётр
+
 
