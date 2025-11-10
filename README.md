@@ -15,6 +15,9 @@
 
 Введите tests.py - чтобы увидеть прохождение тестов
 
+<img width="1029" height="215" alt="image" src="https://github.com/user-attachments/assets/7d434cf5-fc54-4ae0-8f0b-429893e14342" />
+<img width="1082" height="319" alt="image" src="https://github.com/user-attachments/assets/5e5b7459-1266-4a20-9e4f-e696cf181eb1" />
+
 
 ### Примечания по работе с программой
 
@@ -49,3 +52,4 @@
 9. Хведынич Варвара 
 
 10. Хохряков Пётр
+
