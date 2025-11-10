@@ -11,7 +11,9 @@
 
 
 Запустите main.py, чтобы воспользоваться интерфейсом
-<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/f0749dfd-d0d2-45ea-b2c2-f9018ba9f39c" />
+
+<img width="600" height="600" alt="image" src="https://github.com/user-attachments/assets/f0749dfd-d0d2-45ea-b2c2-f9018ba9f39c" />
+
 
 
 
@@ -54,6 +56,7 @@
 9. Хведынич Варвара 
 
 10. Хохряков Пётр
+
 
 
 
