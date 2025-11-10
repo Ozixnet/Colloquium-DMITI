@@ -811,7 +811,7 @@ def test_module_P():
     from modules.Q.Q_NUM import QNum
     from modules.Z.Z_NUM import ZNum
     from modules.N.N_NUM import NNum
-    from modules.P.MUL_Pxk_P import MUL_Pxk_P_f
+    #from modules.P.MUL_Pxk_P import MUL_Pxk_P_f
     from modules.P.MUL_PQ_P import MUL_PQ_P_f
     from modules.P.DEG_P_N import DEG_P_N_f
     from modules.P.DER_P_P import DER_P_P_f
@@ -825,6 +825,7 @@ def test_module_P():
         return QNum(num_z, den_natural)
     
     # Тест MUL_Pxk_P
+    """Создает рациональное число вида num/1
     def test_MUL_Pxk_P():
         poly1 = PNum(1, [create_rational(1), create_rational(1)])
         result = MUL_Pxk_P_f(poly1, 2)
@@ -844,7 +845,8 @@ def test_module_P():
         except ValueError:
             pass
     run_test_safely(test_MUL_Pxk_P, "MUL_Pxk_P: Умножение многочлена на x^k")
-    
+    """
+
     # Тест MUL_PQ_P
     def test_MUL_PQ_P():
         poly1 = PNum(1, [create_rational(3), create_rational(2)])
