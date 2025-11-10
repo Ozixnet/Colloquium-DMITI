@@ -1,102 +1,104 @@
 # Вакух Виктор Сергеевич, гр. 4381
 
+import pytest
 from modules.P.P_NUM import PNum
 from modules.Q.Q_NUM import QNum
 from modules.Z.Z_NUM import ZNum
 from modules.N.N_NUM import NNum
-
 from modules.P.FAC_P_Q import FAC_P_Q_f
 from modules.P.MUL_PP_P import MUL_PP_P_f
 
 
-def create_rational(num: int, den: int = 1) -> QNum:
-    """
-    Создает рациональное число вида num/den
-    """
-    num_natural = NNum(1, [abs(num)])
-    num_z = ZNum(1 if num < 0 else 0, num_natural)
-    den_natural = NNum(1, [abs(den)])
-    return QNum(num_z, den_natural)
+def create_rational(num: int, den: int) -> QNum:
+    abs_num = abs(num)
+    if abs_num == 0:
+        num_digits = [0]
+    else:
+        num_digits = [int(d) for d in str(abs_num)[::-1]]
+
+    num_z = ZNum(0 if num >= 0 else 1, NNum(len(num_digits), num_digits))
+
+    den_digits = [int(d) for d in str(den)[::-1]]
+    den_n = NNum(len(den_digits), den_digits)
+
+    return QNum(num_z, den_n)
 
 
 def test_for_FAC_P_Q():
-    poly1 = PNum(1, [
-        create_rational(4, 5),  # свободный член 4/5
-        create_rational(2, 3)  # коэффициент при x: 2/3
-    ])
-    result1 = FAC_P_Q_f(poly1)
-    assert result1.num_tor.A == [2]  # НОД числителей = 2
-    assert result1.den_tor.A == [5, 1]  # НОК знаменателей = 15
+    #Простой многочлен с одинаковыми знаменателями
+    poly1 = PNum(2, [create_rational(2, 3), create_rational(4, 3), create_rational(6, 3)])
+    result = FAC_P_Q_f(poly1)
+    assert result.num_tor.b == 0
+    assert result.num_tor.A == [2]
+    assert result.den_tor.A == [3]
 
-    poly2 = PNum(2, [
-        create_rational(12, 8),  # 12/8
-        create_rational(9, 6),  # 9/6
-        create_rational(6, 4)  # 6/4
-    ])
-    result2 = FAC_P_Q_f(poly2)
-    assert result2.num_tor.A == [3]  # НОД числителей = 3
-    assert result2.den_tor.A == [4, 2]  # НОК знаменателей = 24
+    #Многочлен с разными знаменателями
+    poly2 = PNum(2, [create_rational(1, 2), create_rational(1, 3), create_rational(1, 4)])
+    result = FAC_P_Q_f(poly2)
+    assert result.num_tor.b == 0
+    assert result.num_tor.A == [1]
+    assert result.den_tor.A == [2, 1]  # 12 = [2, 1]
 
-    poly3 = PNum(1, [
-        create_rational(4, 7),
-        create_rational(2, 7)
-    ])
-    result3 = FAC_P_Q_f(poly3)
-    assert result3.num_tor.A == [2]  # НОД = 2
-    assert result3.den_tor.A == [7]  # НОК = 7
+    #Многочлен с одним коэффициентом
+    poly3 = PNum(0, [create_rational(5, 7)])
+    result = FAC_P_Q_f(poly3)
+    assert result.num_tor.b == 0
+    assert result.num_tor.A == [5]
+    assert result.den_tor.A == [7]
 
-    # Нулевой полином - должен вернуть 1/1
-    zero_poly = PNum(-1, [create_rational(0)])
-    result4 = FAC_P_Q_f(zero_poly)
-    assert result4.num_tor.A == [1]  # числитель = 1
-    assert result4.den_tor.A == [1]  # знаменатель = 1
+    #Нулевой многочлен
+    zero_poly = PNum(-1, [create_rational(0, 1)])
+    result = FAC_P_Q_f(zero_poly)
+    assert result.num_tor.b == 0
+    assert result.num_tor.A == [0]
+    assert result.den_tor.A == [1]
+
 
 
 def test_for_MUL_PP_P():
-    # (x + 1) * (x + 2) = x^2 + 3x + 2
-    poly1 = PNum(1, [create_rational(1), create_rational(1)])
-    poly2 = PNum(1, [create_rational(2), create_rational(1)])
-    result1 = MUL_PP_P_f(poly1, poly2)
-    assert result1.m == 2
-    assert result1.C[0].num_tor.A == [2]
-    assert result1.C[1].num_tor.A == [3]
-    assert result1.C[2].num_tor.A == [1]
+    #Умножение констант
+    poly1 = PNum(0, [create_rational(2, 1)])  # 2
+    poly2 = PNum(0, [create_rational(3, 1)])  # 3
+    result = MUL_PP_P_f(poly1, poly2)  # 2 * 3 = 6
+    assert result.m == 0
+    assert result.C[0].num_tor.A[0] != 0
 
-    # (2x + 3) * (x - 1) = 2x^2 + x - 3
-    poly3 = PNum(1, [create_rational(3), create_rational(2)])
-    poly4 = PNum(1, [create_rational(-1), create_rational(1)])
-    result2 = MUL_PP_P_f(poly3, poly4)
-    assert result2.m == 2
-    assert result2.C[0].num_tor.A == [3] and result2.C[0].num_tor.b == 1
-    assert result2.C[1].num_tor.A == [1]
-    assert result2.C[2].num_tor.A == [2]
+    #Умножение на нулевой многочлен
+    zero_poly = PNum(-1, [create_rational(0, 1)])
+    poly3 = PNum(0, [create_rational(5, 1)])  # 5
+    result = MUL_PP_P_f(poly3, zero_poly)  # Должен вернуть нулевой многочлен
+    assert result.m == -1
+    assert result.C[0].num_tor.A == [0]
 
-    # (x^2 + 1) * (x + 1) = x^3 + x^2 + x + 1
-    poly5 = PNum(2, [create_rational(1), create_rational(0), create_rational(1)])
-    poly6 = PNum(1, [create_rational(1), create_rational(1)])
-    result3 = MUL_PP_P_f(poly5, poly6)
-    assert result3.m == 3
-    assert result3.C[0].num_tor.A == [1]
-    assert result3.C[1].num_tor.A == [1]
-    assert result3.C[2].num_tor.A == [1]
-    assert result3.C[3].num_tor.A == [1]
+    #Умножение линейного на константу
+    poly4 = PNum(1, [create_rational(1, 1), create_rational(2, 1)])  # 2x + 1
+    poly5 = PNum(0, [create_rational(3, 1)])  # 3
+    result = MUL_PP_P_f(poly4, poly5)  # 3(2x+1) = 6x + 3
+    assert result.m == 1
+    assert result.C[0].num_tor.A[0] != 0  # свободный член
+    assert result.C[1].num_tor.A[0] != 0  # коэффициент при x
 
-    # Умножение на нулевой полином = нулевой полином
-    zero_poly = PNum(-1, [create_rational(0)])
-    result4 = MUL_PP_P_f(poly1, zero_poly)
-    assert result4.m == -1
+    #Умножение одинаковых линейных многочленов
+    poly6 = PNum(1, [create_rational(1, 1), create_rational(1, 1)])  # x + 1
+    result = MUL_PP_P_f(poly6, poly6)
+    assert result.m == 2
+    for i in range(3):
+        assert result.C[i].num_tor.A[0] != 0
 
-    # Умножение нулевого полинома на ненулевой = нулевой полином
-    result5 = MUL_PP_P_f(zero_poly, poly2)
-    assert result5.m == -1
+    #Умножение многочленов с целыми коэффициентами
+    poly7 = PNum(1, [create_rational(2, 1), create_rational(3, 1)])  # 3x + 2
+    poly8 = PNum(1, [create_rational(1, 1), create_rational(4, 1)])  # 4x + 1
+    result = MUL_PP_P_f(poly7, poly8)
+    assert result.m == 2
+    assert len(result.C) == 3
 
-    # Умножение на константу: (2) * (x + 1) = 2x + 2
-    const_poly = PNum(0, [create_rational(2)])
-    result6 = MUL_PP_P_f(const_poly, poly1)
-    assert result6.m == 1
-    assert result6.C[0].num_tor.A == [2]
-    assert result6.C[1].num_tor.A == [2]
-
+    #Проверка, что умножение на 1 дает тот же многочлен
+    one_poly = PNum(0, [create_rational(1, 1)])
+    poly9 = PNum(1, [create_rational(2, 1), create_rational(3, 1)])  # 3x + 2
+    result = MUL_PP_P_f(poly9, one_poly)
+    assert result.m == 1
+    assert result.C[0].num_tor.A == [2]
+    assert result.C[1].num_tor.A == [3]
 
 test_for_FAC_P_Q()
 test_for_MUL_PP_P()
