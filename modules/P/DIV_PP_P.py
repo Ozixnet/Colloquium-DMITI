@@ -1,5 +1,7 @@
 from modules.P.P_NUM import PNum
 from modules.Q.Q_NUM import QNum
+from modules.Z.Z_NUM import ZNum
+from modules.N.N_NUM import NNum
 from modules.Q.DIV_QQ_Q import DIV_QQ_Q_f
 from modules.P.DEG_P_N import DEG_P_N_f
 from modules.P.MUL_Pxk_P import MUL_Pxk_P_f
@@ -7,57 +9,80 @@ from modules.P.SUB_PP_P import SUB_PP_P_f
 from modules.P.ADD_PP_P import ADD_PP_P_f
 
 
-# выполнил Тарасов Юрий гр.4381
 def DIV_PP_P_f(arg1: PNum, arg2: PNum) -> PNum:
     """
-    Частное от деления многочлена на многочлен при делении с остатком
-    arg1 - первый многочлен.
-    arg2 - второй многочлен, не может быть 0.
-    Возврат - PNum.
+    Частное от деления многочлена arg1 на многочлен arg2 (деление с остатком).
+    Возвращает PNum — частное.
+    Делитель arg2 не может быть нулевым (m == -1).
     """
+    # Проверка делителя
     if arg2.m == -1:
         raise ValueError("Ошибка. Делитель равен нулю")
 
-    # Получим степени многочленов
-    deg1 = DEG_P_N_f(arg1)
-    deg2 = DEG_P_N_f(arg2)
+    # Функция для преобразования NNum в int с проверкой на нулевой многочлен
+    def get_degree(poly):
+        deg_nnum = DEG_P_N_f(poly)
+        # Преобразуем NNum в int
+        if deg_nnum.A == [0]:
+            deg = 0
+        else:
+            deg = int(''.join(map(str, deg_nnum.A)))
+        # Дополнительная проверка на нулевой многочлен
+        if deg == 0 and poly.C[0].num_tor.A[0] == 0:
+            return -1
+        return deg
 
-    # Инициализируем результат как нулевой многочлен
-    res = PNum(-1, [QNum(0, 1)])
+    deg1 = get_degree(arg1)
+    deg2 = get_degree(arg2)
 
-    # Алгоритм деления
-    while deg1 >= deg2:
-        # Вычисляем коэффициент: старший коэффициент делимого / старший коэффициент делителя
-        coef = DIV_QQ_Q_f(arg1.C[deg1], arg2.C[deg2])
+    # Q_ZERO и Q_ONE в терминах ваших конструкторов ZNum/NNum
+    Q_ZERO = QNum(ZNum(0, NNum(1, [0])), NNum(1, [1]))  # 0/1
+    Q_ONE = QNum(ZNum(0, NNum(1, [1])), NNum(1, [1]))   # 1/1
 
-        # Создаем одночлен: coef * x^(deg1 - deg2)
-        monomial = PNum(0, [coef])  # Многочлен степени 0 с коэффициентом coef
-        if deg1 - deg2 > 0:
-            monomial = MUL_Pxk_P_f(monomial, deg1 - deg2)  # Умножаем на x^k
+    # если степень делимого меньше делителя — частное равно 0
+    if deg1 < deg2 or deg1 == -1:
+        return PNum(-1, [Q_ZERO])
 
-        # Добавляем одночлен к результату
-        res = ADD_PP_P_f(res, monomial)
+    q_deg = deg1 - deg2
+    # инициализация коэффициентов частного нулями (индекс 0 — свободный член)
+    q_coeffs = [Q_ZERO for _ in range(q_deg + 1)]
 
-        # Создаем произведение: делитель * одночлен
-        # Умножаем делитель на x^k
-        shifted_divisor = MUL_Pxk_P_f(arg2, deg1 - deg2)
+    # создаём рабочую копию остатка (не изменяем входной arg1)
+    remainder = PNum(arg1.m, [c for c in arg1.C])
 
-        # Умножаем shifted_divisor на coef (каждый коэффициент умножаем на coef)
-        # Создаем новый многочлен с умноженными коэффициентами
-        multiplied_coeffs = []
-        for q_num in shifted_divisor.C:
-            # Умножение рациональных чисел через деление: a * b = a / (1/b)
-            one = QNum(1, 1)
-            reciprocal = DIV_QQ_Q_f(one, q_num) if q_num.num_tor.A[0] != 0 else QNum(0, 1)
-            multiplied_coef = DIV_QQ_Q_f(coef, reciprocal) if q_num.num_tor.A[0] != 0 else QNum(0, 1)
-            multiplied_coeffs.append(multiplied_coef)
+    # основной цикл деления
+    while True:
+        r_deg = get_degree(remainder)
+        if r_deg < deg2 or r_deg == -1:
+            break
 
-        product = PNum(shifted_divisor.m, multiplied_coeffs)
+        # ведущие коэффициенты остатка и делителя
+        lead_r = remainder.C[r_deg]  # используем r_deg как индекс
+        lead_d = arg2.C[deg2]
 
-        # Вычитаем произведение из делимого
-        arg1 = SUB_PP_P_f(arg1, product)
+        # коэффициент текущего шага: t = lead_r / lead_d
+        t = DIV_QQ_Q_f(lead_r, lead_d)
+        k = r_deg - deg2  # степень смещения для этого коэффициента в частном
 
-        # Обновляем степень
-        deg1 = DEG_P_N_f(arg1)
+        # проверка на выход за границы
+        if k < 0 or k >= len(q_coeffs):
+            break
 
-    return res
+        # записываем коэффициент в частное (позиция k)
+        q_coeffs[k] = t
+
+        # масштабируем делитель на t: scaled_divisor = arg2 * t
+        # умножаем каждый коэффициент arg2.C на t через деление на (1/t):
+        # c * t = c / (1/t)
+        recip_t = DIV_QQ_Q_f(Q_ONE, t)   # 1 / t
+        scaled_C = [DIV_QQ_Q_f(c, recip_t) for c in arg2.C]
+        scaled_divisor = PNum(arg2.m, scaled_C)
+
+        # сдвигаем на x^k
+        subtrahend = MUL_Pxk_P_f(scaled_divisor, k)
+
+        # remainder = remainder - subtrahend
+        remainder = SUB_PP_P_f(remainder, subtrahend)
+
+    # собираем результат (частное). PNum проверит корректность коэффициентов.
+    return PNum(q_deg, q_coeffs)
