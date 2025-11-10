@@ -1,14 +1,4 @@
 import pytest
-import sys
-import os
-
-# Добавляем пути к модулям
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'modules'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'modules', 'P'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'modules', 'Q'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'modules', 'Z'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'modules', 'N'))
-
 from modules.Z.Z_NUM import ZNum
 from modules.N.N_NUM import NNum
 from modules.P.P_NUM import PNum

@@ -8,8 +8,11 @@ from modules.P.SUB_PP_P import SUB_PP_P_f
 def MOD_PP_P_f(arg1: PNum, arg2: PNum) -> PNum:
     """
     Остаток от деления многочлена на многочлен при делении с остатком
+
     arg1 - первый многочлен.
+
     arg2 - второй многочлен, не может быть 0.
+
     Возврат - PNum.
     """
     if arg2.m == -1:
