@@ -5,11 +5,10 @@ from modules.Q.RED_Q_Q import RED_Q_Q_f
 from modules.Q.INT_Q_B import INT_Q_B_f
 from modules.Q.TRANS_Z_Q import TRANS_Z_Q_f
 from modules.Q.TRANS_Q_Z import TRANS_Q_Z_f
-# Временно закомментировано - файлы отсутствуют
-# from modules.Q.ADD_QQ_Q import ADD_QQ_Q_f
-# from modules.Q.SUB_QQ_Q import SUB_QQ_Q_f
-# from modules.Q.MUL_QQ_Q import MUL_QQ_Q_f
-# from modules.Q.DIV_QQ_Q import DIV_QQ_Q_f
+from modules.Q.ADD_QQ_Q import ADD_QQ_Q_f
+from modules.Q.SUB_QQ_Q import SUB_QQ_Q_f
+from modules.Q.MUL_QQ_Q import MUL_QQ_Q_f
+from modules.Q.DIV_QQ_Q import DIV_QQ_Q_f
 
 
 class RationalApp:
@@ -29,9 +28,9 @@ class RationalApp:
         
         self.root = root
         self.root.title("Операции с рациональными числами")
-        self.root.geometry("450x500")
+        self.root.geometry("450x550")
         self.root.configure(bg=self.bg_color)
-        self.center_window(450, 500)
+        self.center_window(450, 550)
 
         self.method_var = tk.StringVar(value="Сложение дробей")
 
@@ -47,11 +46,10 @@ class RationalApp:
             "Проверка на целое",
             "Целое -> дробное",
             "Дробное -> целое",
-            # Временно отключено - файлы отсутствуют
-            # "Сложение дробей",
-            # "Вычитание дробей",
-            # "Умножение дробей",
-            # "Деление дробей",
+            "Сложение дробей",
+            "Вычитание дробей",
+            "Умножение дробей",
+            "Деление дробей",
         ]
 
         method_frame = tk.Frame(root, bg=self.bg_color)
@@ -128,14 +126,13 @@ class RationalApp:
 
     def on_option_change(self, value):
         method_name = self.method_var.get()
-        # Временно отключено - файлы отсутствуют
-        # if method_name in ["Сложение дробей",
-        #                    "Вычитание дробей",
-        #                    "Умножение дробей",
-        #                    "Деление дробей"]:
-        #     self.second_number_label.config(fg=self.backlight, text="Вторая дробь: ✓")
-        # else:
-        self.second_number_label.config(fg=self.text_color, text="Вторая дробь:")
+        if method_name in ["Сложение дробей",
+                           "Вычитание дробей",
+                           "Умножение дробей",
+                           "Деление дробей"]:
+            self.second_number_label.config(fg=self.backlight, text="Вторая дробь: ✓")
+        else:
+            self.second_number_label.config(fg=self.text_color, text="Вторая дробь:")
 
     def calculate(self):
         method_name = self.method_var.get()
@@ -149,48 +146,47 @@ class RationalApp:
                 messagebox.showerror("Ошибка", f"Первое число должно быть рациональным  ( ´•︵•` )\nПример: -3/4")
             return
 
-        # Временно отключено - файлы отсутствуют
-        # if method_name in ["Сложение дробей",
-        #                    "Вычитание дробей",
-        #                    "Умножение дробей",
-        #                    "Деление дробей"]:
-        #     second_number_str = self.second_number_entry.get()
-        #     try:
-        #         second_number = get_Rational(second_number_str)
-        #     except ValueError:
-        #         if second_number_str == '':
-        #             messagebox.showerror("Ошибка", f"Второе число не введено  ( ´•︵•` )\nПример: -3/4")
-        #         else:
-        #             messagebox.showerror("Ошибка", f"Второе число должно быть рациональным  ( ´•︵•` )\nПример: -3/4")
-        #         return
-        #
-        #     if method_name == "Сложение дробей":
-        #         result = ADD_QQ_Q_f(first_number, second_number)
-        #         if len(second_number_str) > 0 and second_number_str[0] == '-':
-        #             self.result_label.config(text=f"{QNum_to_string(first_number)} - {second_number_str[1:]} = {QNum_to_string(result)}")
-        #         else:
-        #             self.result_label.config(text=f"{QNum_to_string(first_number)} + {QNum_to_string(second_number)} = {QNum_to_string(result)}")
-        #
-        #     elif method_name == "Вычитание дробей":
-        #         result = SUB_QQ_Q_f(first_number, second_number)
-        #         if len(second_number_str) > 0 and second_number_str[0] == '-':
-        #             self.result_label.config(text=f"{QNum_to_string(first_number)} + {second_number_str[1:]} = {QNum_to_string(result)}")
-        #         else:
-        #             self.result_label.config(text=f"{QNum_to_string(first_number)} - {QNum_to_string(second_number)} = {QNum_to_string(result)}")
-        #
-        #     elif method_name == "Умножение дробей":
-        #         result = MUL_QQ_Q_f(first_number, second_number)
-        #         self.result_label.config(text=f"{QNum_to_string(first_number)} ∙ {QNum_to_string(second_number)} = {QNum_to_string(result)}")
-        #
-        #     elif method_name == "Деление дробей":
-        #         try:
-        #             result = DIV_QQ_Q_f(first_number, second_number)
-        #             self.result_label.config(text=f"{QNum_to_string(first_number)} ∶ {QNum_to_string(second_number)} = {QNum_to_string(result)}")
-        #         except ValueError:
-        #             messagebox.showerror("Ошибка", f"Нельзя делить на ноль  ( ´•︵•` )")
-        #             return
+        if method_name in ["Сложение дробей",
+                           "Вычитание дробей",
+                           "Умножение дробей",
+                           "Деление дробей"]:
+            second_number_str = self.second_number_entry.get()
+            try:
+                second_number = get_Rational(second_number_str)
+            except ValueError:
+                if second_number_str == '':
+                    messagebox.showerror("Ошибка", f"Второе число не введено  ( ´•︵•` )\nПример: -3/4")
+                else:
+                    messagebox.showerror("Ошибка", f"Второе число должно быть рациональным  ( ´•︵•` )\nПример: -3/4")
+                return
 
-        if method_name == "Сокращение дроби":
+            if method_name == "Сложение дробей":
+                result = ADD_QQ_Q_f(first_number, second_number)
+                if len(second_number_str) > 0 and second_number_str[0] == '-':
+                    self.result_label.config(text=f"{QNum_to_string(first_number)} - {second_number_str[1:]} = {QNum_to_string(result)}")
+                else:
+                    self.result_label.config(text=f"{QNum_to_string(first_number)} + {QNum_to_string(second_number)} = {QNum_to_string(result)}")
+
+            elif method_name == "Вычитание дробей":
+                result = SUB_QQ_Q_f(first_number, second_number)
+                if len(second_number_str) > 0 and second_number_str[0] == '-':
+                    self.result_label.config(text=f"{QNum_to_string(first_number)} + {second_number_str[1:]} = {QNum_to_string(result)}")
+                else:
+                    self.result_label.config(text=f"{QNum_to_string(first_number)} - {QNum_to_string(second_number)} = {QNum_to_string(result)}")
+
+            elif method_name == "Умножение дробей":
+                result = MUL_QQ_Q_f(first_number, second_number)
+                self.result_label.config(text=f"{QNum_to_string(first_number)} ∙ {QNum_to_string(second_number)} = {QNum_to_string(result)}")
+
+            elif method_name == "Деление дробей":
+                try:
+                    result = DIV_QQ_Q_f(first_number, second_number)
+                    self.result_label.config(text=f"{QNum_to_string(first_number)} ∶ {QNum_to_string(second_number)} = {QNum_to_string(result)}")
+                except ValueError:
+                    messagebox.showerror("Ошибка", f"Нельзя делить на ноль  ( ´•︵•` )")
+                    return
+
+        elif method_name == "Сокращение дроби":
             result = RED_Q_Q_f(first_number)
             self.result_label.config(text=f"{QNum_to_string(first_number)} = {QNum_to_string(result)}")
 
