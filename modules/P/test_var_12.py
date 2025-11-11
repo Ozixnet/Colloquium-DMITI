@@ -99,13 +99,11 @@ def test_for_MUL_PP_P():
     assert result.m == 1
     assert result.C[0].num_tor.A == [2]
     assert result.C[1].num_tor.A == [3]
-    # Случай 7: Умножение многочленов с пропущенными степенями
-    # (3x² + 2) * (4x + 1) = 12x³ + 3x² + 8x + 2
+    #Умножение многочленов с пропущенными степенями
     poly10 = PNum(2, [create_rational(2, 1), create_rational(0, 1), create_rational(3, 1)])  # 3x² + 2
     poly11 = PNum(1, [create_rational(1, 1), create_rational(4, 1)])  # 4x + 1
     result = MUL_PP_P_f(poly10, poly11)
     assert result.m == 3
-    # Проверяем, что результат имеет правильную структуру
     assert len(result.C) == 4
 
 test_for_FAC_P_Q()
