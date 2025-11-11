@@ -1,19 +1,22 @@
+# Тарасов Юрий Романович, гр. 4381
+
 from modules.Z.Z_NUM import ZNum
 from modules.N.N_NUM import NNum
 from modules.Z.SUB_ZZ_Z import SUB_ZZ_Z_f
 from modules.Z.MUL_ZZ_Z import MUL_ZZ_Z_f
 from modules.Z.DIV_ZZ_Z import DIV_ZZ_Z_f
-from modules.Z.MUL_ZM_Z import MUL_ZM_Z_f
 
 
-# Тарасов Юрий Романович, гр. 4381
 def MOD_ZZ_Z_f(arg1: ZNum, arg2:ZNum)-> ZNum:
     """
-                Остаток от деления целых чисел(делитель отличен от нуля)
-               arg1 - первое целое число
-               arg2 - делитель, целое число, не может быть 0
-               Возврат - Znum
-               """
+    Остаток от деления целых чисел(делитель отличен от нуля)
+
+    arg1 - первое целое число
+
+    arg2 - делитель, целое число, не может быть 0
+
+    Возврат - Znum
+    """
     if arg2.n == 1 and arg2.A[0] == 0:
         raise ValueError("Ошибка. Делитель равен нулю")
     # если делимое является 0

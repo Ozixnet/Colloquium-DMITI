@@ -15,6 +15,7 @@ def MUL_Nk_N_f(num: NNum, k: int) -> NNum:
     """
     if not isinstance(k, int) or k < 0:
         raise ValueError("k должно быть натуральным числом >= 0")
-
+    if num.A[-1] == 0:
+        return num
     a = [0] * k + num.A  # добавляем k нулей в начало (младший разряд первый)
     return NNum(len(a), a)
