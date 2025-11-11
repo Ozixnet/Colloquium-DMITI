@@ -1,10 +1,18 @@
 import tkinter as tk
 from tkinter import messagebox, font
 from modules.GUI.additionally import *
-# Временно закомментировано - требуют отсутствующие модули
-# from modules.P.ADD_PP_P import ADD_PP_P_f
-# from modules.P.SUB_PP_P import SUB_PP_P_f
-# from modules.P.MUL_PQ_P import MUL_PQ_P_f
+from modules.P.ADD_PP_P import ADD_PP_P_f
+from modules.P.SUB_PP_P import SUB_PP_P_f
+from modules.P.MUL_PQ_P import MUL_PQ_P_f
+from modules.P.MUL_PP_P import MUL_PP_P_f
+from modules.P.DIV_PP_P import DIV_PP_P_f
+from modules.P.MOD_PP_P import MOD_PP_P_f
+from modules.P.DEG_P_N import DEG_P_N_f
+from modules.P.DER_P_P import DER_P_P_f
+from modules.P.LED_P_Q import LED_P_Q_f
+from modules.P.FAC_P_Q import FAC_P_Q_f
+from modules.P.GCF_PP_P import GCF_PP_P_f
+from modules.P.NMR_P_P import NMR_P_P_f
 from modules.P.MUL_Pxk_P import MUL_Pxk_P_f
 
 
@@ -25,9 +33,9 @@ class PolynomialApp:
         
         self.root = root
         self.root.title("Операции с многочленами")
-        self.root.geometry("500x550")
+        self.root.geometry("500x600")
         self.root.configure(bg=self.bg_color)
-        self.center_window(500, 550)
+        self.center_window(500, 600)
 
         self.method_var = tk.StringVar(value="Сложение многочленов")
 
@@ -39,11 +47,19 @@ class PolynomialApp:
 
         # Выбор метода
         methods = [
-            # Временно отключено - требуют отсутствующие модули
-            # "Сложение многочленов",
-            # "Вычитание многочленов",
-            # "Умножение на дробь",
+            "Сложение многочленов",
+            "Вычитание многочленов",
+            "Умножение многочленов",
+            "Умножение на дробь",
             "Умножение на xⁿ",
+            "Деление многочленов",
+            "Остаток от деления",
+            "Степень многочлена",
+            "Производная многочлена",
+            "Старший коэффициент",
+            "НОК знаменателей и НОД числителей",
+            "НОД многочленов",
+            "Преобразование кратных корней",
         ]
 
         method_frame = tk.Frame(root, bg=self.bg_color)
@@ -134,13 +150,15 @@ class PolynomialApp:
         method_name = self.method_var.get()
         self.second_polynomial_label.config(fg=self.text_color, text="Второй многочлен:")
         self.digit_label.config(fg=self.text_color, text="Число:")
-        # Временно отключено - требуют отсутствующие модули
-        # if method_name in ["Сложение многочленов",
-        #                    "Вычитание многочленов"]:
-        #     self.second_polynomial_label.config(fg=self.backlight, text="Второй многочлен: ✓")
-        # elif method_name in ["Умножение на дробь",
-        #                      "Умножение на xⁿ"]:
-        if method_name in ["Умножение на xⁿ"]:
+        if method_name in ["Сложение многочленов",
+                           "Вычитание многочленов",
+                           "Умножение многочленов",
+                           "Деление многочленов",
+                           "Остаток от деления",
+                           "НОД многочленов"]:
+            self.second_polynomial_label.config(fg=self.backlight, text="Второй многочлен: ✓")
+        elif method_name in ["Умножение на дробь",
+                             "Умножение на xⁿ"]:
             self.digit_label.config(fg=self.backlight, text="Число: ✓")
 
     def calculate(self):
@@ -156,56 +174,103 @@ class PolynomialApp:
                 messagebox.showerror("Ошибка", f"Неверный ввод первого многочлена  ( ´•︵•` )\nПример ввода: 3/2 1/4 (коэффициенты через пробел)\nИли: 3x^2 + 2x + 1")
             return
 
-        # Временно отключено - требуют отсутствующие модули
-        # if method_name in ["Сложение многочленов",
-        #                    "Вычитание многочленов"]:
-        #
-        #     second_polynomial_str = self.second_polynomial_entry.get()
-        #     try:
-        #         second_polynomial = get_Polynomial(second_polynomial_str)
-        #     except ValueError:
-        #         if second_polynomial_str == '':
-        #             messagebox.showerror("Ошибка", f"Второй многочлен не введен  ( ´•︵•` )")
-        #         else:
-        #             messagebox.showerror("Ошибка", f"Неверный ввод второго многочлена  ( ´•︵•` )\nПример ввода: 3/2 1/4 (коэффициенты через пробел)\nИли: 3x^2 + 2x + 1")
-        #         return
-        #
-        #     if method_name == "Сложение многочленов":
-        #         result = ADD_PP_P_f(first_polynomial, second_polynomial)
-        #         self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
-        #
-        #     elif method_name == "Вычитание многочленов":
-        #         result = SUB_PP_P_f(first_polynomial, second_polynomial)
-        #         self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
-        #
-        # else:
-        #     if method_name == "Умножение на дробь":
-        #         number_str = self.digit_entry.get()
-        #         if not is_Rational(number_str):
-        #             messagebox.showerror("Ошибка", "Число должно быть рациональным  ( ´•︵•` )\nПример: 3/4 или -5/2")
-        #             return
-        #         try:
-        #             number = get_Rational(number_str)
-        #             result = MUL_PQ_P_f(first_polynomial, number)
-        #             self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
-        #         except ValueError as e:
-        #             messagebox.showerror("Ошибка", str(e))
-        #             return
-        #
-        #     elif method_name == "Умножение на xⁿ":
+        if method_name in ["Сложение многочленов",
+                           "Вычитание многочленов",
+                           "Умножение многочленов",
+                           "Деление многочленов",
+                           "Остаток от деления",
+                           "НОД многочленов"]:
 
-        if method_name == "Умножение на xⁿ":
-            k_str = self.digit_entry.get()
-            if not is_Natural(k_str):
-                messagebox.showerror("Ошибка", "k должно быть неотрицательным целым числом  ( ´•︵•` )")
-                return
+            second_polynomial_str = self.second_polynomial_entry.get()
             try:
-                k = int(k_str)
-                result = MUL_Pxk_P_f(first_polynomial, k)
-                self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
-            except ValueError as e:
-                messagebox.showerror("Ошибка", str(e))
+                second_polynomial = get_Polynomial(second_polynomial_str)
+            except ValueError:
+                if second_polynomial_str == '':
+                    messagebox.showerror("Ошибка", f"Второй многочлен не введен  ( ´•︵•` )")
+                else:
+                    messagebox.showerror("Ошибка", f"Неверный ввод второго многочлена  ( ´•︵•` )\nПример ввода: 3/2 1/4 (коэффициенты через пробел)\nИли: 3x^2 + 2x + 1")
                 return
+
+            if method_name == "Сложение многочленов":
+                result = ADD_PP_P_f(first_polynomial, second_polynomial)
+                self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
+
+            elif method_name == "Вычитание многочленов":
+                result = SUB_PP_P_f(first_polynomial, second_polynomial)
+                self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
+
+            elif method_name == "Умножение многочленов":
+                result = MUL_PP_P_f(first_polynomial, second_polynomial)
+                self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
+
+            elif method_name == "Деление многочленов":
+                try:
+                    result = DIV_PP_P_f(first_polynomial, second_polynomial)
+                    self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
+                except ValueError as e:
+                    messagebox.showerror("Ошибка", str(e))
+                    return
+
+            elif method_name == "Остаток от деления":
+                try:
+                    result = MOD_PP_P_f(first_polynomial, second_polynomial)
+                    self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
+                except ValueError as e:
+                    messagebox.showerror("Ошибка", str(e))
+                    return
+
+            elif method_name == "НОД многочленов":
+                result = GCF_PP_P_f(first_polynomial, second_polynomial)
+                self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
+
+        elif method_name in ["Умножение на дробь", "Умножение на xⁿ"]:
+            if method_name == "Умножение на дробь":
+                number_str = self.digit_entry.get()
+                if not is_Rational(number_str):
+                    messagebox.showerror("Ошибка", "Число должно быть рациональным  ( ´•︵•` )\nПример: 3/4 или -5/2")
+                    return
+                try:
+                    number = get_Rational(number_str)
+                    result = MUL_PQ_P_f(first_polynomial, number)
+                    self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
+                except ValueError as e:
+                    messagebox.showerror("Ошибка", str(e))
+                    return
+
+            elif method_name == "Умножение на xⁿ":
+                k_str = self.digit_entry.get()
+                if not is_Natural(k_str):
+                    messagebox.showerror("Ошибка", "k должно быть неотрицательным целым числом  ( ´•︵•` )")
+                    return
+                try:
+                    k = int(k_str)
+                    result = MUL_Pxk_P_f(first_polynomial, k)
+                    self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
+                except ValueError as e:
+                    messagebox.showerror("Ошибка", str(e))
+                    return
+
+        else:
+            if method_name == "Степень многочлена":
+                degree_nnum = DEG_P_N_f(first_polynomial)
+                degree_str = NNum_to_string(degree_nnum)
+                self.result_label.config(text=f"Степень: {degree_str}")
+
+            elif method_name == "Производная многочлена":
+                result = DER_P_P_f(first_polynomial)
+                self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
+
+            elif method_name == "Старший коэффициент":
+                result = LED_P_Q_f(first_polynomial)
+                self.result_label.config(text=f"Результат: {QNum_to_string(result)}")
+
+            elif method_name == "НОК знаменателей и НОД числителей":
+                result = FAC_P_Q_f(first_polynomial)
+                self.result_label.config(text=f"Результат: {QNum_to_string(result)}")
+
+            elif method_name == "Преобразование кратных корней":
+                result = NMR_P_P_f(first_polynomial)
+                self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
 
 
 def create_PolynomialApp(root, theme):
