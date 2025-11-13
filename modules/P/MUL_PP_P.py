@@ -13,7 +13,9 @@ from modules.Q.MUL_QQ_Q import MUL_QQ_Q_f
 def MUL_PP_P_f(poly1: PNum, poly2: PNum) -> PNum:
     """
     Умножение многочленов
+
     poly1, poly2 - многочлены для умножения.
+
     Возврат - произведение многочленов.
     """
     zero_natural = NNum(1, [0])
