@@ -30,9 +30,9 @@ class IntegerApp:
         
         self.root = root
         self.root.title("Операции с целыми числами")
-        self.root.geometry("450x500")
+        self.root.geometry("450x600")
         self.root.configure(bg=self.bg_color)
-        self.center_window(450, 500)
+        self.center_window(450, 600)
 
         self.method_var = tk.StringVar(value="Сложение двух чисел")
 
@@ -75,7 +75,7 @@ class IntegerApp:
 
         # Контейнер для полей ввода
         input_frame = tk.Frame(root, bg=self.bg_color)
-        input_frame.pack(pady=15, padx=20, fill=tk.BOTH, expand=True)
+        input_frame.pack(pady=15, padx=20, fill=tk.BOTH, expand=False)
 
         # Ввод первого числа
         input_font = font.Font(family="Segoe GUI", size=10)
@@ -103,11 +103,23 @@ class IntegerApp:
         self.second_number_entry.pack(fill=tk.X, pady=(0, 15), ipady=8)
 
         # Метка для результата
-        result_font = font.Font(family="Segoe GUI", size=13, weight="bold")
-        self.result_label = tk.Label(input_frame, text="", bg=self.bg_color, 
-                                     fg=self.backlight, font=result_font,
-                                     wraplength=400, justify=tk.LEFT)
-        self.result_label.pack(pady=10, fill=tk.X)
+        # Фрейм для результата с прокруткой
+        result_frame = tk.Frame(input_frame, bg=self.bg_color)
+        result_frame.pack(pady=10, fill=tk.BOTH, expand=False)
+
+        # Скроллбар
+        result_scrollbar = tk.Scrollbar(result_frame, bg=self.window_color, troughcolor=self.bg_color)
+        result_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+        # Text виджет вместо Label
+        result_font = font.Font(family="Segoe GUI", size=13, weight="bold")  # для Polynomial_GUI.py size=12
+        self.result_text = tk.Text(result_frame, bg=self.entry_bg, fg=self.backlight,
+                                   font=result_font, wrap=tk.WORD,
+                                   height=4, relief=tk.FLAT, bd=2,  # для Polynomial_GUI.py height=5
+                                   highlightthickness=1, highlightbackground=self.entry_border,
+                                   yscrollcommand=result_scrollbar.set, state=tk.DISABLED)
+        self.result_text.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        result_scrollbar.config(command=self.result_text.yview)
 
         # Кнопка для выполнения операции
         button_font = font.Font(family="Segoe GUI", size=13, weight="bold")
@@ -173,25 +185,25 @@ class IntegerApp:
             if method_name == "Сложение двух чисел":
                 result = ADD_ZZ_Z_f(first_number, second_number)
                 if len(second_number_str) > 0 and second_number_str[0] == '-':
-                    self.result_label.config(text=f"{ZNum_to_string(first_number)} - {second_number_str[1:]} = {ZNum_to_string(result)}")
+                    self._set_result(f"{ZNum_to_string(first_number)} - {second_number_str[1:]} = {ZNum_to_string(result)}")
                 else:
-                    self.result_label.config(text=f"{ZNum_to_string(first_number)} + {ZNum_to_string(second_number)} = {ZNum_to_string(result)}")
+                    self._set_result(f"{ZNum_to_string(first_number)} + {ZNum_to_string(second_number)} = {ZNum_to_string(result)}")
 
             elif method_name == "Вычитание двух чисел":
                 result = SUB_ZZ_Z_f(first_number, second_number)
                 if len(second_number_str) > 0 and second_number_str[0] == '-':
-                    self.result_label.config(text=f"{ZNum_to_string(first_number)} + {second_number_str[1:]} = {ZNum_to_string(result)}")
+                    self._set_result(f"{ZNum_to_string(first_number)} + {second_number_str[1:]} = {ZNum_to_string(result)}")
                 else:
-                    self.result_label.config(text=f"{ZNum_to_string(first_number)} - {ZNum_to_string(second_number)} = {ZNum_to_string(result)}")
+                    self._set_result(f"{ZNum_to_string(first_number)} - {ZNum_to_string(second_number)} = {ZNum_to_string(result)}")
 
             elif method_name == "Умножение двух чисел":
                 result = MUL_ZZ_Z_f(first_number, second_number)
-                self.result_label.config(text=f"{ZNum_to_string(first_number)} ∙ {ZNum_to_string(second_number)} = {ZNum_to_string(result)}")
+                self._set_result(f"{ZNum_to_string(first_number)} ∙ {ZNum_to_string(second_number)} = {ZNum_to_string(result)}")
 
             elif method_name == "Деление целочисленное":
                 try:
                     result = DIV_ZZ_Z_f(first_number, second_number)
-                    self.result_label.config(text=f"{ZNum_to_string(first_number)} div {ZNum_to_string(second_number)} = {ZNum_to_string(result)}")
+                    self._set_result(f"{ZNum_to_string(first_number)} div {ZNum_to_string(second_number)} = {ZNum_to_string(result)}")
                 except:
                     messagebox.showerror("Ошибка", f"Нельзя делить на ноль  ( ´•︵•` )")
                     return
@@ -199,7 +211,7 @@ class IntegerApp:
             elif method_name == "Деление с остатком":
                 try:
                     result = MOD_ZZ_Z_f(first_number, second_number)
-                    self.result_label.config(text=f"{ZNum_to_string(first_number)} mod {ZNum_to_string(second_number)} = {ZNum_to_string(result)}")
+                    self._set_result(f"{ZNum_to_string(first_number)} mod {ZNum_to_string(second_number)} = {ZNum_to_string(result)}")
                 except:
                     messagebox.showerror("Ошибка", f"Нельзя делить на ноль  ( ´•︵•` )")
                     return
@@ -207,7 +219,7 @@ class IntegerApp:
         else:
             if method_name == "Модуль числа":
                 result = ABS_Z_N_f(first_number)
-                self.result_label.config(text=f"Результат: {NNum_to_string(result)}")
+                self._set_result(f"Результат: {NNum_to_string(result)}")
 
             elif method_name == "Определение знака":
                 result = POZ_Z_D_f(first_number)
@@ -217,11 +229,11 @@ class IntegerApp:
                     res = '<'
                 else:
                     res = '='
-                self.result_label.config(text=f"{ZNum_to_string(first_number)} {res} 0")
+                self._set_result(f"{ZNum_to_string(first_number)} {res} 0")
 
             elif method_name == "Умножение на -1":
                 result = MUL_ZM_Z_f(first_number)
-                self.result_label.config(text=f"-1 ∙ {ZNum_to_string(first_number)} = {ZNum_to_string(result)}")
+                self._set_result(f"-1 ∙ {ZNum_to_string(first_number)} = {ZNum_to_string(result)}")
 
             elif method_name == "Натуральное -> целое":
                 try:
@@ -230,15 +242,24 @@ class IntegerApp:
                     messagebox.showerror("Ошибка", "Первое число должно быть натуральным  ( ´•︵•` )")
                     return
                 result = TRANS_N_Z_f(natural)
-                self.result_label.config(text=f"Результат: {ZNum_to_string(result)}")
+                self._set_result(f"Результат: {ZNum_to_string(result)}")
 
             elif method_name == "Целое -> натуральное":
                 try:
                     result = TRANS_Z_N_f(first_number)
-                    self.result_label.config(text=f"Результат: {NNum_to_string(result)}")
+                    self._set_result(f"Результат: {NNum_to_string(result)}")
                 except ValueError:
                     messagebox.showerror("Ошибка", "Первое число должно быть неотрицательным  ( ´•︵•` )")
                     return
+
+    def _set_result(self, text):
+        """Устанавливает текст результата в Text виджет"""
+        self.result_text.config(state=tk.NORMAL)
+        self.result_text.delete(1.0, tk.END)
+        self.result_text.insert(1.0, text)
+        self.result_text.config(state=tk.DISABLED)
+        # Прокручиваем в начало
+        self.result_text.see(1.0)
 
 
 def create_IntegerApp(root, theme):
