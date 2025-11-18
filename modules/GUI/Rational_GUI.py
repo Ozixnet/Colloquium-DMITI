@@ -28,9 +28,9 @@ class RationalApp:
         
         self.root = root
         self.root.title("Операции с рациональными числами")
-        self.root.geometry("450x550")
+        self.root.geometry("450x650")
         self.root.configure(bg=self.bg_color)
-        self.center_window(450, 550)
+        self.center_window(450, 650)
 
         self.method_var = tk.StringVar(value="Сложение дробей")
 
@@ -70,7 +70,7 @@ class RationalApp:
 
         # Контейнер для полей ввода
         input_frame = tk.Frame(root, bg=self.bg_color)
-        input_frame.pack(pady=15, padx=20, fill=tk.BOTH, expand=True)
+        input_frame.pack(pady=15, padx=20, fill=tk.BOTH, expand=False)
 
         # Ввод первого числа
         input_font = font.Font(family="Segoe GUI", size=10)
@@ -97,12 +97,23 @@ class RationalApp:
                                             highlightcolor=self.backlight)
         self.second_number_entry.pack(fill=tk.X, pady=(0, 15), ipady=8)
 
-        # Метка для результата
-        result_font = font.Font(family="Segoe GUI", size=13, weight="bold")
-        self.result_label = tk.Label(input_frame, text="", bg=self.bg_color, 
-                                     fg=self.backlight, font=result_font,
-                                     wraplength=400, justify=tk.LEFT)
-        self.result_label.pack(pady=10, fill=tk.X)
+        # Фрейм для результата с прокруткой
+        result_frame = tk.Frame(input_frame, bg=self.bg_color)
+        result_frame.pack(pady=10, fill=tk.BOTH, expand=False)
+
+        # Скроллбар
+        result_scrollbar = tk.Scrollbar(result_frame, bg=self.window_color, troughcolor=self.bg_color)
+        result_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+        # Text виджет вместо Label
+        result_font = font.Font(family="Segoe GUI", size=13, weight="bold")  # для Polynomial_GUI.py size=12
+        self.result_text = tk.Text(result_frame, bg=self.entry_bg, fg=self.backlight,
+                                   font=result_font, wrap=tk.WORD,
+                                   height=4, relief=tk.FLAT, bd=2,  # для Polynomial_GUI.py height=5
+                                   highlightthickness=1, highlightbackground=self.entry_border,
+                                   yscrollcommand=result_scrollbar.set, state=tk.DISABLED)
+        self.result_text.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        result_scrollbar.config(command=self.result_text.yview)
 
         # Кнопка для выполнения операции
         button_font = font.Font(family="Segoe GUI", size=13, weight="bold")
@@ -163,39 +174,39 @@ class RationalApp:
             if method_name == "Сложение дробей":
                 result = ADD_QQ_Q_f(first_number, second_number)
                 if len(second_number_str) > 0 and second_number_str[0] == '-':
-                    self.result_label.config(text=f"{QNum_to_string(first_number)} - {second_number_str[1:]} = {QNum_to_string(result)}")
+                    self._set_result(f"{QNum_to_string(first_number)} - {second_number_str[1:]} = {QNum_to_string(result)}")
                 else:
-                    self.result_label.config(text=f"{QNum_to_string(first_number)} + {QNum_to_string(second_number)} = {QNum_to_string(result)}")
+                    self._set_result(f"{QNum_to_string(first_number)} + {QNum_to_string(second_number)} = {QNum_to_string(result)}")
 
             elif method_name == "Вычитание дробей":
                 result = SUB_QQ_Q_f(first_number, second_number)
                 if len(second_number_str) > 0 and second_number_str[0] == '-':
-                    self.result_label.config(text=f"{QNum_to_string(first_number)} + {second_number_str[1:]} = {QNum_to_string(result)}")
+                    self._set_result(f"{QNum_to_string(first_number)} + {second_number_str[1:]} = {QNum_to_string(result)}")
                 else:
-                    self.result_label.config(text=f"{QNum_to_string(first_number)} - {QNum_to_string(second_number)} = {QNum_to_string(result)}")
+                    self._set_result(f"{QNum_to_string(first_number)} - {QNum_to_string(second_number)} = {QNum_to_string(result)}")
 
             elif method_name == "Умножение дробей":
                 result = MUL_QQ_Q_f(first_number, second_number)
-                self.result_label.config(text=f"{QNum_to_string(first_number)} ∙ {QNum_to_string(second_number)} = {QNum_to_string(result)}")
+                self._set_result(f"{QNum_to_string(first_number)} ∙ {QNum_to_string(second_number)} = {QNum_to_string(result)}")
 
             elif method_name == "Деление дробей":
                 try:
                     result = DIV_QQ_Q_f(first_number, second_number)
-                    self.result_label.config(text=f"{QNum_to_string(first_number)} ∶ {QNum_to_string(second_number)} = {QNum_to_string(result)}")
+                    self._set_result(f"{QNum_to_string(first_number)} ∶ {QNum_to_string(second_number)} = {QNum_to_string(result)}")
                 except ValueError:
                     messagebox.showerror("Ошибка", f"Нельзя делить на ноль  ( ´•︵•` )")
                     return
 
         elif method_name == "Сокращение дроби":
             result = RED_Q_Q_f(first_number)
-            self.result_label.config(text=f"{QNum_to_string(first_number)} = {QNum_to_string(result)}")
+            self._set_result(f"{QNum_to_string(first_number)} = {QNum_to_string(result)}")
 
         elif method_name == "Проверка на целое":
             result = INT_Q_B_f(first_number)
             if result == 'да':
-                self.result_label.config(text=f"Является целым")
+                self._set_result(f"Является целым")
             else:
-                self.result_label.config(text=f"Не является целым")
+                self._set_result(f"Не является целым")
 
         elif method_name == "Целое -> дробное":
             try:
@@ -204,15 +215,25 @@ class RationalApp:
                 messagebox.showerror("Ошибка", "Первое число должно быть целым  ( ´•︵•` )")
                 return
             result = TRANS_Z_Q_f(first_number)
-            self.result_label.config(text=f"Результат: {QNum_to_string(result)}")
+            self._set_result(f"Результат: {QNum_to_string(result)}")
 
         elif method_name == "Дробное -> целое":
             try:
                 result = TRANS_Q_Z_f(first_number)
-                self.result_label.config(text=f"Результат: {ZNum_to_string(result)}")
+                self._set_result(f"Результат: {ZNum_to_string(result)}")
             except ValueError:
                 messagebox.showerror("Ошибка", "Знаменатель не равен 1  ( ´•︵•` )")
                 return
+
+    def _set_result(self, text):
+        """Устанавливает текст результата в Text виджет"""
+        self.result_text.config(state=tk.NORMAL)
+        self.result_text.delete(1.0, tk.END)
+        self.result_text.insert(1.0, text)
+        self.result_text.config(state=tk.DISABLED)
+        # Прокручиваем в начало
+        self.result_text.see(1.0)
+
 
 
 def create_RationalApp(root, theme):
