@@ -102,7 +102,7 @@ def test_module_N():
     
     # Импорты модулей
     from modules.N.N_NUM import NNum
-    from modules.N.COM_NN_D import COM_NN_D_f
+    from modules.N.com_nn_d import COM_NN_D_f
     from modules.N.NZER_N_B import NZER_N_B_f
     from modules.N.ADD_NN_N import ADD_NN_N_f
     from modules.N.SUB_NN_N import SUB_NN_N_f
