@@ -21,21 +21,30 @@ def MOD_ZZ_Z_f(arg1: ZNum, arg2: ZNum)-> ZNum:
     """
     if arg2.n == 1 and arg2.A[0] == 0:
         raise ValueError("Ошибка. Делитель равен нулю")
-    if POZ_Z_D_f(arg1) == 1 and POZ_Z_D_f(arg2) == 1 or POZ_Z_D_f(arg1) != 1 and POZ_Z_D_f(arg2) == 1:
+    # сохраняем исходные знаки
+    poz1_original = POZ_Z_D_f(arg1)
+    poz2_original = POZ_Z_D_f(arg2)
+    # преобразуем знаки, если нужно (для случаев когда оба отрицательные или только делитель отрицательный)
+    if (poz1_original == 1 and poz2_original == 1) or (poz1_original != 1 and poz2_original == 1):
         arg1 = MUL_ZM_Z_f(arg1)
         arg2 = MUL_ZM_Z_f(arg2)
+        # запоминаем, что преобразовали знаки
+        transformed = True
+    else:
+        transformed = False
     # если делимое является 0
     if arg1.n == 1 and arg1.A[0] == 0:
         return ZNum(0, NNum(1, [0]))
     # найдем частное от деления
     k = DIV_ZZ_Z_f(arg1, arg2)
     # умножим 2 аргумент на частное
-    arg2_s = arg2
-    arg2 = MUL_ZZ_Z_f(arg2, k)
-    res = SUB_ZZ_Z_f(arg1, arg2)
-    if POZ_Z_D_f(res) == 1:
-        arg2_s = MUL_ZM_Z_f(arg2_s)
-        res = SUB_ZZ_Z_f(res, arg2_s)
+    arg2_times_k = MUL_ZZ_Z_f(arg2, k)
+    # вычисляем остаток: a - b * k
+    res = SUB_ZZ_Z_f(arg1, arg2_times_k)
+    # если преобразовывали знаки и исходный делитель был отрицательным,
+    # нужно изменить знак остатка обратно
+    if transformed and poz2_original == 1:
+        res = MUL_ZM_Z_f(res)
     # получаем и возвращаем остаток
     return res
 
