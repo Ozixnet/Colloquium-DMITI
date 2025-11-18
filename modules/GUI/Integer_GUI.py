@@ -9,8 +9,7 @@ from modules.Z.SUB_ZZ_Z import SUB_ZZ_Z_f
 from modules.Z.MUL_ZZ_Z import MUL_ZZ_Z_f
 from modules.Z.DIV_ZZ_Z import DIV_ZZ_Z_f
 from modules.Z.MOD_ZZ_Z import MOD_ZZ_Z_f
-from modules.Z.TRANS_N_Z import TRANS_N_Z_f
-from modules.Z.TRANS_Z_N import TRANS_Z_N_f
+
 
 
 class IntegerApp:
@@ -48,8 +47,6 @@ class IntegerApp:
             "Модуль числа",
             "Определение знака",
             "Умножение на -1",
-            "Натуральное -> целое",
-            "Целое -> натуральное",
             "Сложение двух чисел",
             "Вычитание двух чисел",
             "Умножение двух чисел",
@@ -235,22 +232,6 @@ class IntegerApp:
                 result = MUL_ZM_Z_f(first_number)
                 self._set_result(f"-1 ∙ {ZNum_to_string(first_number)} = {ZNum_to_string(result)}")
 
-            elif method_name == "Натуральное -> целое":
-                try:
-                    natural = get_Natural(first_number_str)
-                except ValueError:
-                    messagebox.showerror("Ошибка", "Первое число должно быть натуральным  ( ´•︵•` )")
-                    return
-                result = TRANS_N_Z_f(natural)
-                self._set_result(f"Результат: {ZNum_to_string(result)}")
-
-            elif method_name == "Целое -> натуральное":
-                try:
-                    result = TRANS_Z_N_f(first_number)
-                    self._set_result(f"Результат: {NNum_to_string(result)}")
-                except ValueError:
-                    messagebox.showerror("Ошибка", "Первое число должно быть неотрицательным  ( ´•︵•` )")
-                    return
 
     def _set_result(self, text):
         """Устанавливает текст результата в Text виджет"""
