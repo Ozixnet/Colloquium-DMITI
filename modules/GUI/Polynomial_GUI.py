@@ -33,9 +33,9 @@ class PolynomialApp:
         
         self.root = root
         self.root.title("Операции с многочленами")
-        self.root.geometry("500x600")
+        self.root.geometry("500x700")
         self.root.configure(bg=self.bg_color)
-        self.center_window(500, 600)
+        self.center_window(500, 700)
 
         self.method_var = tk.StringVar(value="Сложение многочленов")
 
@@ -80,7 +80,7 @@ class PolynomialApp:
 
         # Контейнер для полей ввода
         input_frame = tk.Frame(root, bg=self.bg_color)
-        input_frame.pack(pady=15, padx=20, fill=tk.BOTH, expand=True)
+        input_frame.pack(pady=15, padx=20, fill=tk.BOTH, expand=False)
 
         # Ввод первого многочлена
         input_font = font.Font(family="Segoe GUI", size=10)
@@ -119,12 +119,23 @@ class PolynomialApp:
                                     highlightcolor=self.backlight)
         self.digit_entry.pack(fill=tk.X, pady=(0, 15), ipady=8)
 
-        # Метка для результата
-        result_font = font.Font(family="Segoe GUI", size=12, weight="bold")
-        self.result_label = tk.Label(input_frame, text="", bg=self.bg_color, 
-                                     fg=self.backlight, font=result_font,
-                                     wraplength=450, justify=tk.LEFT)
-        self.result_label.pack(pady=10, fill=tk.X)
+        # Фрейм для результата с прокруткой
+        result_frame = tk.Frame(input_frame, bg=self.bg_color)
+        result_frame.pack(pady=10, fill=tk.BOTH, expand=False)
+
+        # Скроллбар
+        result_scrollbar = tk.Scrollbar(result_frame, bg=self.window_color, troughcolor=self.bg_color)
+        result_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+        # Text виджет вместо Label
+        result_font = font.Font(family="Segoe GUI", size=13, weight="bold")  # для Polynomial_GUI.py size=12
+        self.result_text = tk.Text(result_frame, bg=self.entry_bg, fg=self.backlight,
+                                   font=result_font, wrap=tk.WORD,
+                                   height=4, relief=tk.FLAT, bd=2,  # для Polynomial_GUI.py height=5
+                                   highlightthickness=1, highlightbackground=self.entry_border,
+                                   yscrollcommand=result_scrollbar.set, state=tk.DISABLED)
+        self.result_text.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        result_scrollbar.config(command=self.result_text.yview)
 
         # Кнопка для выполнения операции
         button_font = font.Font(family="Segoe GUI", size=13, weight="bold")
@@ -193,20 +204,20 @@ class PolynomialApp:
 
             if method_name == "Сложение многочленов":
                 result = ADD_PP_P_f(first_polynomial, second_polynomial)
-                self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
+                self._set_result(f"Результат: {PNum_to_string(result)}")
 
             elif method_name == "Вычитание многочленов":
                 result = SUB_PP_P_f(first_polynomial, second_polynomial)
-                self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
+                self._set_result(f"Результат: {PNum_to_string(result)}")
 
             elif method_name == "Умножение многочленов":
                 result = MUL_PP_P_f(first_polynomial, second_polynomial)
-                self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
+                self._set_result(f"Результат: {PNum_to_string(result)}")
 
             elif method_name == "Деление многочленов":
                 try:
                     result = DIV_PP_P_f(first_polynomial, second_polynomial)
-                    self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
+                    self._set_result(f"Результат: {PNum_to_string(result)}")
                 except ValueError as e:
                     messagebox.showerror("Ошибка", str(e))
                     return
@@ -214,14 +225,14 @@ class PolynomialApp:
             elif method_name == "Остаток от деления":
                 try:
                     result = MOD_PP_P_f(first_polynomial, second_polynomial)
-                    self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
+                    self._set_result(f"Результат: {PNum_to_string(result)}")
                 except ValueError as e:
                     messagebox.showerror("Ошибка", str(e))
                     return
 
             elif method_name == "НОД многочленов":
                 result = GCF_PP_P_f(first_polynomial, second_polynomial)
-                self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
+                self._set_result(f"Результат: {PNum_to_string(result)}")
 
         elif method_name in ["Умножение на дробь", "Умножение на xⁿ"]:
             if method_name == "Умножение на дробь":
@@ -232,7 +243,7 @@ class PolynomialApp:
                 try:
                     number = get_Rational(number_str)
                     result = MUL_PQ_P_f(first_polynomial, number)
-                    self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
+                    self._set_result(f"Результат: {PNum_to_string(result)}")
                 except ValueError as e:
                     messagebox.showerror("Ошибка", str(e))
                     return
@@ -245,7 +256,7 @@ class PolynomialApp:
                 try:
                     k = int(k_str)
                     result = MUL_Pxk_P_f(first_polynomial, k)
-                    self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
+                    self._set_result(f"Результат: {PNum_to_string(result)}")
                 except ValueError as e:
                     messagebox.showerror("Ошибка", str(e))
                     return
@@ -254,23 +265,32 @@ class PolynomialApp:
             if method_name == "Степень многочлена":
                 degree_nnum = DEG_P_N_f(first_polynomial)
                 degree_str = NNum_to_string(degree_nnum)
-                self.result_label.config(text=f"Степень: {degree_str}")
+                self._set_result(f"Степень: {degree_str}")
 
             elif method_name == "Производная многочлена":
                 result = DER_P_P_f(first_polynomial)
-                self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
+                self._set_result(f"Результат: {PNum_to_string(result)}")
 
             elif method_name == "Старший коэффициент":
                 result = LED_P_Q_f(first_polynomial)
-                self.result_label.config(text=f"Результат: {QNum_to_string(result)}")
+                self._set_result(f"Результат: {QNum_to_string(result)}")
 
             elif method_name == "НОК знаменателей и НОД числителей":
                 result = FAC_P_Q_f(first_polynomial)
-                self.result_label.config(text=f"Результат: {QNum_to_string(result)}")
+                self._set_result(f"Результат: {QNum_to_string(result)}")
 
             elif method_name == "Преобразование кратных корней":
                 result = NMR_P_P_f(first_polynomial)
-                self.result_label.config(text=f"Результат: {PNum_to_string(result)}")
+                self._set_result(f"Результат: {PNum_to_string(result)}")
+
+    def _set_result(self, text):
+        """Устанавливает текст результата в Text виджет"""
+        self.result_text.config(state=tk.NORMAL)
+        self.result_text.delete(1.0, tk.END)
+        self.result_text.insert(1.0, text)
+        self.result_text.config(state=tk.DISABLED)
+        # Прокручиваем в начало
+        self.result_text.see(1.0)
 
 
 def create_PolynomialApp(root, theme):
