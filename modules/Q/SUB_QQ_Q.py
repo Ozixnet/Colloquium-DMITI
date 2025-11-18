@@ -6,6 +6,7 @@ from modules.N.DIV_NN_N import DIV_NN_N_f
 from modules.Z.MUL_ZZ_Z import MUL_ZZ_Z_f
 from modules.Z.SUB_ZZ_Z import SUB_ZZ_Z_f
 from modules.Z.TRANS_N_Z import TRANS_N_Z_f
+from modules.Q.RED_Q_Q import RED_Q_Q_f
 
 
 def SUB_QQ_Q_f(num1: QNum, num2: QNum) -> QNum:
@@ -32,4 +33,5 @@ def SUB_QQ_Q_f(num1: QNum, num2: QNum) -> QNum:
     SUB_Z = SUB_ZZ_Z_f(MUL1, MUL2)
     # Полученная дробь
     SUB_Q = QNum(SUB_Z, LCM)
+    SUB_Q = RED_Q_Q_f(SUB_Q)
     return SUB_Q

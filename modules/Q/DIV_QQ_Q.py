@@ -5,6 +5,7 @@ from modules.Z.MUL_ZZ_Z import MUL_ZZ_Z_f
 from modules.Z.TRANS_N_Z import TRANS_N_Z_f
 from modules.Z.TRANS_Z_N import TRANS_Z_N_f
 from modules.Z.MUL_ZM_Z import MUL_ZM_Z_f
+from modules.Q.RED_Q_Q import RED_Q_Q_f
 
 
 def DIV_QQ_Q_f(num1: QNum, num2: QNum) -> QNum:
@@ -28,4 +29,5 @@ def DIV_QQ_Q_f(num1: QNum, num2: QNum) -> QNum:
         MUL1 = MUL_ZM_Z_f(MUL1)
     # Полученная дробь
     DIV_Q = QNum(MUL1, TRANS_Z_N_f(MUL2))
+    DIV_Q = RED_Q_Q_f(DIV_Q)
     return DIV_Q
