@@ -38,6 +38,9 @@ def MUL_PP_P_f(poly1: PNum, poly2: PNum) -> PNum:
             # Умножаем коэффициенты при текущих степенях
             coeff_product = MUL_QQ_Q_f(poly1.C[i], poly2.C[j])
 
+            if coeff_product.num_tor.A[0] == 0:
+                continue
+                
             # Создаем многочлен с одним коэффициентом
             single_term = PNum(0, [coeff_product])
 
