@@ -1701,19 +1701,19 @@ $N_G(g) = \{x ∈ G : xgx⁻¹ = g\}$
 
 # 11. СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ
 
-1.     [Линал 2 | Симметрическая группа. Подстановки.Антисимметричные формы. Произведение ПЛФ.](https://www.youtube.com/watch?v=ASsEVLgTKBk)  - ИТМО
+1.[Линал 2 | Симметрическая группа. Подстановки.Антисимметричные формы. Произведение ПЛФ.](https://www.youtube.com/watch?v=ASsEVLgTKBk)  - ИТМО
 
-2.     [ИТМО вики](1.%09https:/neerc.ifmo.ru/wiki/index.php?title=%D0%93%D1%80%D1%83%D0%BF%D0%BF%D0%B0&mobileaction=toggle_view_desktop)
+2.[ИТМО вики](1.%09https:/neerc.ifmo.ru/wiki/index.php?title=%D0%93%D1%80%D1%83%D0%BF%D0%BF%D0%B0&mobileaction=toggle_view_desktop)
 
-3.     [ХНУР АиГ Лекция 6 Симметрическая группа](https://studfile.net/preview/3023027/)
+3.[ХНУР АиГ Лекция 6 Симметрическая группа](https://studfile.net/preview/3023027/)
 
-4. [МГУ ВМК (pdf‑лекция): “Группы… Симметрическая группа перестановок. Подгруппы. Теорема Кэли.”](https://mk.cs.msu.ru/images/1/17/Dm_lection9.pdf)
+4.[МГУ ВМК (pdf‑лекция): “Группы… Симметрическая группа перестановок. Подгруппы. Теорема Кэли.”](https://mk.cs.msu.ru/images/1/17/Dm_lection9.pdf)
 
-5. [НИУ ВШЭ (pdf‑конспект А.А. Кириллова): “Лекция 6. Модель группы SnSn”](https://math.hse.ru/data/2019/04/16/1176673162/%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D1%8F%206_16apr.pdf)
+5.[НИУ ВШЭ (pdf‑конспект А.А. Кириллова): “Лекция 6. Модель группы SnSn”](https://math.hse.ru/data/2019/04/16/1176673162/%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D1%8F%206_16apr.pdf)
 
-6. [НИУ ВШЭ (pdf‑конспект А.А. Кириллова): “Лекция 6. Модель группы SnSn”](https://publications.hse.ru/pubs/share/direct/872342935.pdf)
+6.[НИУ ВШЭ (pdf‑конспект А.А. Кириллова): “Лекция 6. Модель группы SnSn”](https://publications.hse.ru/pubs/share/direct/872342935.pdf)
 
-7. [МЦНМО (pdf‑лист): “Симметрическая группа”](https://old.mccme.ru/ium/postscript/f17/algebra1-task06.pdf)
+7.[МЦНМО (pdf‑лист): “Симметрическая группа”](https://old.mccme.ru/ium/postscript/f17/algebra1-task06.pdf)
 
 
 
