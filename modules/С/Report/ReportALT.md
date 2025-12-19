@@ -1703,7 +1703,7 @@ $N_G(g) = \{x ∈ G : xgx⁻¹ = g\}$
 
 1.[Линал 2 | Симметрическая группа. Подстановки.Антисимметричные формы. Произведение ПЛФ.](https://www.youtube.com/watch?v=ASsEVLgTKBk)  - ИТМО
 
-2.[ИТМО вики](1.%09https:/neerc.ifmo.ru/wiki/index.php?title=%D0%93%D1%80%D1%83%D0%BF%D0%BF%D0%B0&mobileaction=toggle_view_desktop)
+2.[ИТМО вики](https:/neerc.ifmo.ru/wiki/index.php?title=%D0%93%D1%80%D1%83%D0%BF%D0%BF%D0%B0&mobileaction=toggle_view_desktop)
 
 3.[ХНУР АиГ Лекция 6 Симметрическая группа](https://studfile.net/preview/3023027/)
 
