@@ -2,6 +2,7 @@ from modules.GUI.Natural_GUI import create_NaturalApp
 from modules.GUI.Integer_GUI import create_IntegerApp
 from modules.GUI.Rational_GUI import create_RationalApp
 from modules.GUI.Polynomial_GUI import create_PolynomialApp
+from modules.GUI.Combinatorics_GUI import create_CombinatoricsApp
 import tkinter as tk
 from tkinter import font
 
